@@ -39,10 +39,10 @@ import model.Course;
  * @author a9512
  */
 public class FXMLDocumentController implements Initializable {
-    
+    //Start of Course
     @FXML
     private Label label;
-      @FXML
+    @FXML
     private Button createbutton;
 
     @FXML
@@ -60,7 +60,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button readbymabutton;
     
-     @FXML
+    @FXML
     private Button searchButton;
      
     @FXML
@@ -172,7 +172,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
 //Source: Demo Code
-        private ObservableList<Course> courseData;
+    private ObservableList<Course> courseData;
 
     
     public void setTableData(List<Course> courseList) {
@@ -235,7 +235,7 @@ public class FXMLDocumentController implements Initializable {
     //Source:Demo Code
     @FXML
     void readCourse(ActionEvent event) {
-         Query query = manager.createNamedQuery("Course.findAll");
+        Query query = manager.createNamedQuery("Course.findAll");
         List<Course> courses = query.getResultList();
 
         for (Course s : courses) {
@@ -243,7 +243,7 @@ public class FXMLDocumentController implements Initializable {
         }
         
     }
-//source:demo code
+    //source:demo code
     @FXML
     void updateCourse(ActionEvent event) {
        Scanner input = new Scanner(System.in);
@@ -269,6 +269,7 @@ public class FXMLDocumentController implements Initializable {
         update(courses);
         System.out.println("Course Updated");
     }
+    
     //source: demo code
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -280,6 +281,7 @@ public class FXMLDocumentController implements Initializable {
             System.out.println(s.getId() + " " + s.getName() + " " + s.getMajor()+" "+s.getProname());
         }
     }
+    
     //Source: demo code
      @FXML
     void readByID(ActionEvent event) {
@@ -291,7 +293,8 @@ public class FXMLDocumentController implements Initializable {
         Course s = readById(id);
         System.out.println(s.toString());
     }
-//source: demo code
+    
+    //source: demo code
     @FXML
     void readByMajor(ActionEvent event) {
         Scanner input = new Scanner(System.in);
@@ -305,78 +308,49 @@ public class FXMLDocumentController implements Initializable {
      @FXML
     void searchButton1(ActionEvent event) {
         System.out.println("Clicked");
-        
         //Source: Demo Code     
         String name = searchBar.getText();
-
-       
         List<Course> courses = readByCourse(name);
-
         if (courses == null || courses.isEmpty()) {
-
-           
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Search Dialog Box");
             alert.setHeaderText("Search Results");
             alert.setContentText("No Course Found");
             alert.showAndWait(); 
-        } else {
-
-        
+        } 
+        else {
             setTableData(courses);
         }
     }
-
-
+    
     //Source:Demo Code
-    EntityManager manager;
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //Source:Demo Code
-        manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
-        
-        //Source: Demo Code
-         CourseColum.setCellValueFactory(new PropertyValueFactory<>("name"));
-        idColum.setCellValueFactory(new PropertyValueFactory<>("id"));
-        pronameColum.setCellValueFactory(new PropertyValueFactory<>("proname"));
-        majorColum.setCellValueFactory(new PropertyValueFactory<>("major"));
-
-        CourseTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-    }    
-    //Source:Demo Code
-public void create(Course courses) {
+    public void create(Course courses) {
         try {
             manager.getTransaction().begin();
-            
             if (courses.getId() != null) {
-                
                 manager.persist(courses);
-                
                 manager.getTransaction().commit();
-                
                 System.out.println(courses.toString() + " is created");
             }
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
-//source: demo code
-public Course readById(int id){
+    
+    //source: demo code
+    public Course readById(int id){
         Query query = manager.createNamedQuery("Course.findById");
-        
         query.setParameter("id", id);
-        
         Course courses = (Course) query.getSingleResult();
         if (courses != null) {
             System.out.println(courses.getId() + " " + courses.getName() + " " + courses.getMajor()+" "+courses.getProname());
         }
-        
         return courses;
-    }        
-//source:demo code
-  public void delete(Course courses) {
+    }
+    
+    //source:demo code
+    public void delete(Course courses) {
         try {
             Course existingCourse = manager.find(Course.class, courses.getId());
 
@@ -391,24 +365,23 @@ public Course readById(int id){
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-    }      
-  //Source: Demo Code
-     public void update(Course model) {
+    }
+    
+    //Source: Demo Code
+    public void update(Course model) {
         try {
 
             Course existingCourse = manager.find(Course.class, model.getId());
 
             if (existingCourse != null) {
-
                 manager.getTransaction().begin();
-                
                 existingCourse.setName(model.getName());
                 existingCourse.setMajor(model.getMajor());
                 existingCourse.setProname(model.getProname());
-         
                 manager.getTransaction().commit();
             }
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -424,9 +397,10 @@ public Course readById(int id){
         }
         
         return courses;
-    } 
-      //Source:Demo Code
-     public List<Course> readByCourse(String name) {
+    }
+      
+    //Source:Demo Code
+    public List<Course> readByCourse(String name) {
         Query query = manager.createNamedQuery("Course.findByName");
 
         query.setParameter("name", name);
@@ -438,8 +412,9 @@ public Course readById(int id){
 
         return courses;
     }
-     //source:demo code
-     public List<Course> readByCourseAdvanced(String name) {
+     
+    //source:demo code
+    public List<Course> readByCourseAdvanced(String name) {
         Query query = manager.createNamedQuery("Course.findByCourseNameAdvanced");
 
 
@@ -453,5 +428,25 @@ public Course readById(int id){
 
         return courses;
     }
-    }        
+//End of Course
+
+    //Source:Demo Code
+    EntityManager manager;
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        //Source:Demo Code
+        manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
+        
+        //Source: Demo Code
+        //Course Start
+        CourseColum.setCellValueFactory(new PropertyValueFactory<>("name"));
+        idColum.setCellValueFactory(new PropertyValueFactory<>("id"));
+        pronameColum.setCellValueFactory(new PropertyValueFactory<>("proname"));
+        majorColum.setCellValueFactory(new PropertyValueFactory<>("major"));
+        CourseTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        //Course End
+    }    
+
+}        
 
