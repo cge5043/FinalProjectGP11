@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="859.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLDocumentController">
     <children>
         <Button fx:id="button" layoutX="398.0" layoutY="142.0" onAction="#handleButtonAction" text="Click Me!" />
       <Button fx:id="createbutton" layoutX="155.0" layoutY="100.0" mnemonicParsing="false" onAction="#createCourse" prefHeight="28.0" prefWidth="124.0" text="Create" />
@@ -36,10 +36,10 @@
       <Text layoutX="264.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Course Name:" wrappingWidth="99.0" />
       <TextField fx:id="searchBar" layoutX="403.0" layoutY="281.0" prefHeight="26.0" prefWidth="220.0" />
       <Button fx:id="advancedSearch" layoutX="594.0" layoutY="320.0" mnemonicParsing="false" onAction="#advancedSearch1" prefHeight="28.0" prefWidth="139.0" text="Advanced Search" />
-      <Button fx:id="showDetail" layoutX="388.0" layoutY="360.0" mnemonicParsing="false" onAction="#showDetailButton" prefHeight="28.0" prefWidth="84.0" text="Show Detail" />
-      <Button fx:id="showDetailwindow" layoutX="577.0" layoutY="360.0" mnemonicParsing="false" onAction="#showDetailPlace" prefHeight="28.0" prefWidth="156.0" text="Show Details in Place" />
+      <Button fx:id="showDetail" layoutX="388.0" layoutY="360.0" mnemonicParsing="false" onAction="#showDetailButton" prefHeight="28.0" prefWidth="99.0" text="Show Detail" />
+      <Button fx:id="showDetailwindow" layoutX="558.0" layoutY="360.0" mnemonicParsing="false" onAction="#showDetailPlace" prefHeight="28.0" prefWidth="175.0" text="Show Details in Place" />
       <Button layoutX="782.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
-      <Button layoutX="770.0" layoutY="83.0" mnemonicParsing="false" text="To Do List" />
+      <Button fx:id="toDoListButton" layoutX="770.0" layoutY="83.0" mnemonicParsing="false" onAction="#showToDoList" text="To Do List" />
       <Button layoutX="782.0" layoutY="48.0" mnemonicParsing="false" text="Mailbox" />
     </children>
 </AnchorPane>

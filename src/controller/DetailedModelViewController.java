@@ -44,7 +44,7 @@ public class DetailedModelViewController {
     @FXML
     private ImageView image;
     
-      @FXML
+    @FXML
     private Button backButton;
 
     @FXML
@@ -59,13 +59,14 @@ public class DetailedModelViewController {
 
     }
 //Source: Demo Code
-     Scene previousScene;
+    Scene previousScene;
 //Source: Demo Code
     public void setPreviousScene(Scene scene) {
         previousScene = scene;
         backButton.setDisable(false);
 
     }
+    
     Course selectedModel;
        public void initData(Course model) {
         selectedModel = model;
@@ -75,12 +76,11 @@ public class DetailedModelViewController {
         CourseMajor.setText(model.getMajor());
 
         try {
-
             String imagename = "/resource/images/" + model.getProname()+ ".png";
             Image profile = new Image(getClass().getResourceAsStream(imagename));
             image.setImage(profile);
-
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

@@ -33,6 +33,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import model.Course;
+import model.Todolist;
 
 /**
  *
@@ -87,6 +88,9 @@ public class FXMLDocumentController implements Initializable {
     private Button showDetail;
     @FXML
     private Button showDetailwindow;
+    
+    @FXML // fx:id="todolistTable"
+    private TableView<Todolist> todolistTable; // Value injected by FXMLLoader
     
     @FXML
     void showDetailPlace(ActionEvent event) throws IOException {
@@ -446,7 +450,31 @@ public class FXMLDocumentController implements Initializable {
         majorColum.setCellValueFactory(new PropertyValueFactory<>("major"));
         CourseTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //Course End
-    }    
+    }
+    
+    @FXML
+    void showToDoList(ActionEvent event) throws IOException {
+        System.out.println("clicked");
+
+//        //Source: Demo Code
+//        Todolist toDoList= todolistTable.getSelectionModel().getSelectedItem();
+
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ToDoListController.fxml"));
+
+        Parent toDoListModelView = loader.load();
+        Scene tableViewScene = new Scene(toDoListModelView);
+        System.out.println("Hello");
+
+        ToDoListController toDolistControlled = loader.getController();
+
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        toDolistControlled.setPreviousScene(currentScene);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setScene(tableViewScene);
+        stage.show();
+    }
 
 }        
 
