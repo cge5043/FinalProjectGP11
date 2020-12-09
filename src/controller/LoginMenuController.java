@@ -60,7 +60,7 @@ public class LoginMenuController implements Initializable {
     void createNew(ActionEvent event) throws IOException {
         System.out.println("clicked");
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/accountcreation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/accountcreation.fxml"));
 
         Parent accountCreationLoader = loader.load();
         Scene tableViewScene = new Scene(accountCreationLoader);
