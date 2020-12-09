@@ -456,18 +456,14 @@ public class FXMLDocumentController implements Initializable {
     void showToDoList(ActionEvent event) throws IOException {
         System.out.println("clicked");
 
-//        //Source: Demo Code
-//        Todolist toDoList= todolistTable.getSelectionModel().getSelectedItem();
-
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ToDoListController.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ToDoList.fxml"));
 
         Parent toDoListModelView = loader.load();
         Scene tableViewScene = new Scene(toDoListModelView);
-        System.out.println("Hello");
 
         ToDoListController toDolistControlled = loader.getController();
 
+        
         Scene currentScene = ((Node) event.getSource()).getScene();
         toDolistControlled.setPreviousScene(currentScene);
 

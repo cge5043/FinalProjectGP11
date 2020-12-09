@@ -68,7 +68,7 @@ public class DetailedModelViewController {
     }
     
     Course selectedModel;
-       public void initData(Course model) {
+    public void initData(Course model) {
         selectedModel = model;
         courseID.setText(model.getId().toString());
         CourseName.setText(model.getName());

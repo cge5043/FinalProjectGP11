@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/cge19/Documents/Github/FinalProject/src/model/Course.java</file>
-            <file>file:/C:/Users/cge19/Documents/Github/FinalProject/src/ist311group11fxml/IST311Group11FXML.java</file>
             <file>file:/C:/Users/cge19/Documents/Github/FinalProject/src/controller/DetailedModelViewController.java</file>
+            <file>file:/C:/Users/cge19/Documents/Github/FinalProject/src/model/Todolist.java</file>
             <file>file:/C:/Users/cge19/Documents/Github/FinalProject/src/view/FXMLDocument.fxml</file>
+            <file>file:/C:/Users/cge19/Documents/Github/FinalProject/src/controller/ToDoListController.java</file>
             <file>file:/C:/Users/cge19/Documents/Github/FinalProject/src/controller/FXMLDocumentController.java</file>
-            <file>file:/C:/Users/cge19/Documents/Github/FinalProject/src/view/DetailedModelView.fxml</file>
         </group>
     </open-files>
 </project-private>

@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import model.Course;
 import model.Todolist;
 
 /**
@@ -163,5 +164,10 @@ public class ToDoListController {
         if (previousScene != null) {
             stage.setScene(previousScene);
         }
+    }
+    
+    Todolist selectedModel;
+    public void initData(Todolist model) {
+        selectedModel = model;
     }
 }
