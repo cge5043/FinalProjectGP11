@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import model.Course;
 import model.Todolist;
 
 /**

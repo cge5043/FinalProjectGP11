@@ -50,7 +50,7 @@ public class DetailedModelViewController {
     @FXML
     void backButton1(ActionEvent event) {
         //Source:Demo Code
-          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             
         if (previousScene != null) {
             stage.setScene(previousScene);

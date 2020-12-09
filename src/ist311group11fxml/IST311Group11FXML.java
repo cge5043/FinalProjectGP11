@@ -19,7 +19,7 @@ public class IST311Group11FXML extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/loginView.fxml"));
         
         Scene scene = new Scene(root);
         
