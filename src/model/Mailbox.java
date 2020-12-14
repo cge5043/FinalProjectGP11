@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Mailbox.findAll", query = "SELECT m FROM Mailbox m"),
     @NamedQuery(name = "Mailbox.findByCanvasaccountid", query = "SELECT m FROM Mailbox m WHERE m.canvasaccountid = :canvasaccountid"),
+    @NamedQuery(name = "Mailbox.findByName", query = "SELECT c FROM Mailbox c WHERE c.emailsender = :emailsender"),
     @NamedQuery(name = "Mailbox.findByEmailsender", query = "SELECT m FROM Mailbox m WHERE m.emailsender = :emailsender"),
     @NamedQuery(name = "Mailbox.findByEmailtitle", query = "SELECT m FROM Mailbox m WHERE m.emailtitle = :emailtitle"),
     @NamedQuery(name = "Mailbox.findByEmailtext", query = "SELECT m FROM Mailbox m WHERE m.emailtext = :emailtext"),
@@ -37,7 +38,6 @@ public class Mailbox implements Serializable {
     @Basic(optional = false)
     @Column(name = "CANVASACCOUNTID")
     private Integer canvasaccountid;
-    @Basic(optional = false)
     @Column(name = "EMAILSENDER")
     private String emailsender;
     @Column(name = "EMAILTITLE")

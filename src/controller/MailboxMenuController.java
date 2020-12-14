@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -79,39 +80,42 @@ public class MailboxMenuController implements Initializable {
     
     @FXML
     private TableColumn<Mailbox, String> emaildate;
+    @FXML
+    private TableColumn<Mailbox, String> emailtext;
     
     @FXML
     private Button backButton;
 
     private ObservableList<Mailbox> emailData;
 
-    public void setTableData(List<Mailbox> emailList) {
+    public void setTableData(List<Mailbox> emails) {
         emailData = FXCollections.observableArrayList();
         System.out.println("Hello");
-        emailList.forEach(s -> {
+        emails.forEach(s -> {
             emailData.add(s);
         });
         emailTable.setItems(emailData);
         emailTable.refresh();
+        System.out.println("Hello2");
     }
 
     @FXML
     void searchByEmailAction(ActionEvent event) {
-        System.out.println("clicked");       
+        System.out.println("Clicked");
+        //Source: Demo Code     
         String emailsender = textboxSender.getText();
-        List<Mailbox> emails = readByEmailAddress(emailsender);
-
-        if (emails == null || emails.isEmpty()) {
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog Box");
-            alert.setHeaderText("This is header section to write heading");
-            alert.setContentText("No email");
+        System.out.println(emailsender);
+        
+        List<Mailbox> email = readByEmailAddress(emailsender);
+        if (email == null || email.isEmpty()) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Search Dialog Box");
+            alert.setHeaderText("Search Results");
+            alert.setContentText("No Course Found");
             alert.showAndWait(); 
         } 
         else {
-
-            setTableData(emails);
+            setTableData(email);
         }
 
     }
@@ -120,19 +124,20 @@ public class MailboxMenuController implements Initializable {
     void searchByEmailAdvancedAction(ActionEvent event) {
         System.out.println("clicked");     
         String title = textboxSender.getText();
+        System.out.println(title);
 
-        List<Mailbox> emails = readByEmailAddress(title);
-
-        if (emails == null || emails.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog Box");
-            alert.setHeaderText("This is header section to write heading");
-            alert.setContentText("No email");
-            alert.showAndWait();
-        } 
-        else {
-            setTableData(emails);
-        }
+//        List<Mailbox> emails = readByEmailAddress(title);
+//
+//        if (emails == null || emails.isEmpty()) {
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Information Dialog Box");
+//            alert.setHeaderText("This is header section to write heading");
+//            alert.setContentText("No email");
+//            alert.showAndWait();
+//        } 
+//        else {
+//            setTableData(emails);
+//        }
     }
 
     @FXML
@@ -232,13 +237,13 @@ public class MailboxMenuController implements Initializable {
 
     @FXML
     void readByEmailAddress(ActionEvent event) {
-        Scanner input = new Scanner(System.in);
-        
-        System.out.println("Enter Name:");
-        String address = input.next();
-        
-        //List<Email> e = readByEmailAddress(address);
-        //System.out.println(e.toString());
+        Query query = manager.createNamedQuery("Mailbox.findAll");
+        List<Mailbox> courses = query.getResultList();
+
+        for (Mailbox e : courses) {
+            System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle() + " " + e.getEmailtext() + " " + e.getEmaildate());
+        }
+        setTableData(courses);
 
     }
 
@@ -307,10 +312,11 @@ public class MailboxMenuController implements Initializable {
         manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
         
         // CODE FROM SAMPLE
-        canvasaccountid.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        emailsender.setCellValueFactory(new PropertyValueFactory<>("Email Sender"));
-        emailtitle.setCellValueFactory(new PropertyValueFactory<>("Email Title"));
-        emaildate.setCellValueFactory(new PropertyValueFactory<>("Email Date"));
+        canvasaccountid.setCellValueFactory(new PropertyValueFactory<>("Canvasaccountid"));
+        emailsender.setCellValueFactory(new PropertyValueFactory<>("Emailsender"));
+        emailtitle.setCellValueFactory(new PropertyValueFactory<>("Emailtitle"));
+        emailtext.setCellValueFactory(new PropertyValueFactory<>("Emailtext"));
+        emaildate.setCellValueFactory(new PropertyValueFactory<>("Emaildate"));
 
         //eanble row selection
         emailTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -369,19 +375,19 @@ public class MailboxMenuController implements Initializable {
     }   
     
     //from class code
-    public List<Mailbox> readByEmailAddress(String emailAddress){
-        Query query = manager.createNamedQuery("Mailbox.findBySenderAdvanced");
+    public List<Mailbox> readByEmailAddress(String emailsender){
+        Query query = manager.createNamedQuery("Mailbox.findByName");
         
 
-        query.setParameter("emailsender", emailAddress);
+        query.setParameter("emailsender", emailsender);
         
 
-        List<Mailbox> email =  query.getResultList();
-        for (Mailbox e: email) {
-            System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle());
+        List<Mailbox> emails =  query.getResultList();
+        for (Mailbox e: emails) {
+            System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle() + " " + e.getEmailtext() + " " + e.getEmaildate());
         }
         
-        return email;
+        return emails;
     }        
     
     //public List<Mailbox> readByIdAndEmailAddress(int id, String emailAddress){

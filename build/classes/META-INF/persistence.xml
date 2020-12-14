@@ -5,6 +5,7 @@
     <class>model.Course</class>
     <class>model.Todolist</class>
     <class>model.Login</class>
+    <class>model.Mailbox</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/gp11_db;create=true "/>
       <property name="javax.persistence.jdbc.user" value="APP"/>

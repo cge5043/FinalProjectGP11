@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="731.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MailboxMenuController">
+<AnchorPane id="AnchorPane" prefHeight="742.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MailboxMenuController">
     <children>
         <Button fx:id="button" layoutX="245.0" layoutY="163.0" onAction="#handleButtonAction" text="Click Me!" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
@@ -21,16 +21,17 @@
          <font>
             <Font size="32.0" />
          </font></Label>
-      <Button layoutX="627.0" layoutY="276.0" mnemonicParsing="false" onAction="#searchByEmailAction" text="Search" />
-      <Button layoutX="627.0" layoutY="312.0" mnemonicParsing="false" onAction="#searchByEmailAdvancedAction" prefHeight="27.0" prefWidth="115.0" text="Advanced Search" />
+      <Button fx:id="searchEmailButton" layoutX="627.0" layoutY="276.0" mnemonicParsing="false" onAction="#searchByEmailAction" text="Search" />
+      <Button layoutX="627.0" layoutY="312.0" mnemonicParsing="false" onAction="#searchByEmailAdvancedAction" prefHeight="27.0" prefWidth="142.0" text="Advanced Search" />
       <Button layoutX="669.0" layoutY="679.0" mnemonicParsing="false" onAction="#actionShowDetails" text="Show Details" />
       <Button layoutX="491.0" layoutY="678.0" mnemonicParsing="false" onAction="#actionShowDetailsInPlace" prefHeight="27.0" prefWidth="154.0" text="Show Details In-Place" />
-      <TableView fx:id="emailTable" layoutX="4.0" layoutY="340.0" prefHeight="266.0" prefWidth="761.0">
+      <TableView fx:id="emailTable" layoutX="80.0" layoutY="371.0" prefHeight="266.0" prefWidth="1094.0">
         <columns>
           <TableColumn fx:id="canvasaccountid" prefWidth="67.99999713897705" text="ID" />
-          <TableColumn fx:id="emailsender" prefWidth="193.60003662109375" text="Sender" />
-            <TableColumn fx:id="emailtitle" prefWidth="364.7999267578125" text="Email Title" />
-            <TableColumn fx:id="emaildate" prefWidth="134.40004882812502" text="Date" />
+          <TableColumn fx:id="emailsender" prefWidth="185.59998321533203" text="Sender" />
+            <TableColumn fx:id="emailtitle" prefWidth="197.60003662109375" text="Email Title" />
+            <TableColumn fx:id="emailtext" prefWidth="544.0001831054688" text="Email Text" />
+            <TableColumn fx:id="emaildate" minWidth="0.0" prefWidth="97.599853515625" text="Date" />
         </columns>
       </TableView>
       <Line endX="527.0" layoutX="268.0" layoutY="218.0" startX="-267.9999694824219" />
