@@ -38,7 +38,7 @@
       <Button fx:id="advancedSearch" layoutX="594.0" layoutY="320.0" mnemonicParsing="false" onAction="#advancedSearch1" prefHeight="28.0" prefWidth="139.0" text="Advanced Search" />
       <Button fx:id="showDetail" layoutX="388.0" layoutY="360.0" mnemonicParsing="false" onAction="#showDetailButton" prefHeight="28.0" prefWidth="99.0" text="Show Detail" />
       <Button fx:id="showDetailwindow" layoutX="558.0" layoutY="360.0" mnemonicParsing="false" onAction="#showDetailPlace" prefHeight="28.0" prefWidth="175.0" text="Show Details in Place" />
-      <Button layoutX="782.0" layoutY="14.0" mnemonicParsing="false" text="Log Out" />
+      <Button fx:id="logOutButton" layoutX="782.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
       <Button fx:id="toDoListButton" layoutX="770.0" layoutY="83.0" mnemonicParsing="false" onAction="#showToDoList" text="To Do List" />
       <Button layoutX="782.0" layoutY="48.0" mnemonicParsing="false" text="Mailbox" />
     </children>

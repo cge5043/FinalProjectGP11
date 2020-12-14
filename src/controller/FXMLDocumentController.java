@@ -88,6 +88,8 @@ public class FXMLDocumentController implements Initializable {
     private Button showDetail;
     @FXML
     private Button showDetailwindow;
+    @FXML
+    private Button logOutButton;
     
     @FXML // fx:id="todolistTable"
     private TableView<Todolist> todolistTable; // Value injected by FXMLLoader
@@ -466,6 +468,30 @@ public class FXMLDocumentController implements Initializable {
         
         Scene currentScene = ((Node) event.getSource()).getScene();
         toDolistControlled.setPreviousScene(currentScene);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setScene(tableViewScene);
+        stage.show();
+    }
+    
+    public void setPreviousScene(Scene scene) {
+        Scene previousScene = scene;
+        //backButton.setDisable(false);
+    }
+    
+    Scene previousScene;
+    @FXML
+    void logOut(ActionEvent event) throws IOException {
+        System.out.println("Hello");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
+
+        Parent HomeLoader = loader.load();
+        Scene tableViewScene = new Scene(HomeLoader);
+
+        LoginMenuController home = loader.getController();
+
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        home.setPreviousScene(currentScene);
 
         Stage stage = (Stage) currentScene.getWindow();
         stage.setScene(tableViewScene);
