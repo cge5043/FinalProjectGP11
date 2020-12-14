@@ -39,7 +39,7 @@ import model.Todolist;
  *
  * @author a9512
  */
-public class FXMLDocumentController implements Initializable {
+public class CourseMenuController implements Initializable {
     //Start of Course
     @FXML
     private Label label;
@@ -90,6 +90,9 @@ public class FXMLDocumentController implements Initializable {
     private Button showDetailwindow;
     @FXML
     private Button logOutButton;
+    
+    @FXML
+    private Button mailboxButton;
     
     @FXML // fx:id="todolistTable"
     private TableView<Todolist> todolistTable; // Value injected by FXMLLoader
@@ -496,6 +499,23 @@ public class FXMLDocumentController implements Initializable {
         Stage stage = (Stage) currentScene.getWindow();
         stage.setScene(tableViewScene);
         stage.show();
+    }
+    
+    @FXML
+    void openMailbox(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MailboxMenuView.fxml"));
+
+        Parent HomeLoader = loader.load();
+        Scene tableViewScene = new Scene(HomeLoader);
+
+        MailboxMenuController home = loader.getController();
+
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        home.setPreviousScene(currentScene);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setScene(tableViewScene);
+        stage.show(); 
     }
 
 }        

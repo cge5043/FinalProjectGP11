@@ -99,12 +99,12 @@ public class LoginMenuController implements Initializable {
         if (loginStatus == true){
             
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CourseMenuView.fxml"));
 
         Parent HomeLoader = loader.load();
         Scene tableViewScene = new Scene(HomeLoader);
 
-        FXMLDocumentController home = loader.getController();
+        CourseMenuController home = loader.getController();
 
         Scene currentScene = ((Node) event.getSource()).getScene();
         home.setPreviousScene(currentScene);
