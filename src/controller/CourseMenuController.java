@@ -88,14 +88,9 @@ public class CourseMenuController implements Initializable {
     private Button showDetail;
     @FXML
     private Button showDetailwindow;
-    @FXML
-    private Button logOutButton;
+
     
-    @FXML
-    private Button mailboxButton;
-    
-    @FXML // fx:id="todolistTable"
-    private TableView<Todolist> todolistTable; // Value injected by FXMLLoader
+
     
     @FXML
     void showDetailPlace(ActionEvent event) throws IOException {
@@ -457,42 +452,25 @@ public class CourseMenuController implements Initializable {
         //Course End
     }
     
-    @FXML
-    void showToDoList(ActionEvent event) throws IOException {
-        System.out.println("clicked");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ToDoList.fxml"));
-
-        Parent toDoListModelView = loader.load();
-        Scene tableViewScene = new Scene(toDoListModelView);
-
-        ToDoListController toDolistControlled = loader.getController();
-
-        
-        Scene currentScene = ((Node) event.getSource()).getScene();
-        toDolistControlled.setPreviousScene(currentScene);
-
-        Stage stage = (Stage) currentScene.getWindow();
-        stage.setScene(tableViewScene);
-        stage.show();
-    }
-    
+    Scene previousScene;
     public void setPreviousScene(Scene scene) {
         Scene previousScene = scene;
         //backButton.setDisable(false);
     }
     
-    Scene previousScene;
     @FXML
-    void logOut(ActionEvent event) throws IOException {
-        System.out.println("Hello");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
+    void backButton1(ActionEvent event) throws IOException {
+        System.out.println("clicked");
 
-        Parent HomeLoader = loader.load();
-        Scene tableViewScene = new Scene(HomeLoader);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentMenuView.fxml"));
 
-        LoginMenuController home = loader.getController();
+        Parent studentMenuView = loader.load();
+        Scene tableViewScene = new Scene(studentMenuView);
 
+        StudentMenuController home = loader.getController();
+
+        
         Scene currentScene = ((Node) event.getSource()).getScene();
         home.setPreviousScene(currentScene);
 
@@ -501,22 +479,6 @@ public class CourseMenuController implements Initializable {
         stage.show();
     }
     
-    @FXML
-    void openMailbox(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MailboxMenuView.fxml"));
-
-        Parent HomeLoader = loader.load();
-        Scene tableViewScene = new Scene(HomeLoader);
-
-        MailboxMenuController home = loader.getController();
-
-        Scene currentScene = ((Node) event.getSource()).getScene();
-        home.setPreviousScene(currentScene);
-
-        Stage stage = (Stage) currentScene.getWindow();
-        stage.setScene(tableViewScene);
-        stage.show(); 
-    }
 
 }        
 

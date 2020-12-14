@@ -451,12 +451,12 @@ public class MailboxMenuController implements Initializable {
     
     @FXML
     void backButton1(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CourseMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentMenuView.fxml"));
 
         Parent HomeLoader = loader.load();
         Scene tableViewScene = new Scene(HomeLoader);
 
-        CourseMenuController home = loader.getController();
+        StudentMenuController home = loader.getController();
 
         Scene currentScene = ((Node) event.getSource()).getScene();
         home.setPreviousScene(currentScene);

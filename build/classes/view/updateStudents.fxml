@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="701.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateStudentsController">
+   <children>
+      <TextField fx:id="courseBar1" layoutX="220.0" layoutY="249.0" />
+      <TextField fx:id="firstBar" layoutX="220.0" layoutY="135.0" />
+      <TextField fx:id="LastBAR" layoutX="221.0" layoutY="172.0" />
+      <TextField fx:id="majorBar" layoutX="220.0" layoutY="210.0" />
+      <TextField fx:id="courseBar9" layoutX="221.0" layoutY="565.0" />
+      <TextField fx:id="courseBar8" layoutX="220.0" layoutY="523.0" />
+      <TextField fx:id="courseBar7" layoutX="220.0" layoutY="480.0" />
+      <TextField fx:id="courseBar6" layoutX="220.0" layoutY="440.0" />
+      <TextField fx:id="courseBar5" layoutX="220.0" layoutY="401.0" />
+      <TextField fx:id="courseBar10" layoutX="220.0" layoutY="604.0" />
+      <TextField fx:id="studentidBar" layoutX="220.0" layoutY="97.0" />
+      <TextField fx:id="courseBar2" layoutX="220.0" layoutY="288.0" />
+      <TextField fx:id="courseBar3" layoutX="221.0" layoutY="326.0" />
+      <TextField fx:id="courseBar4" layoutX="221.0" layoutY="364.0" />
+      <Text fx:id="updateStudent" layoutX="127.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Student" wrappingWidth="308.462890625">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Button fx:id="updateComplete" layoutX="165.0" layoutY="643.0" mnemonicParsing="false" onAction="#update" prefHeight="35.0" prefWidth="181.0" text="Complete Update" />
+      <Label fx:id="studentlabel" layoutX="104.0" layoutY="95.0" text="Student ID">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course2" layoutX="127.0" layoutY="286.0" text="Course 2">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course1" layoutX="127.0" layoutY="247.0" text="Course 1">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="major" layoutX="150.0" layoutY="208.0" text="Major">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="lastname" layoutX="104.0" layoutY="170.0" text="Last Name">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="firstname" layoutX="104.0" layoutY="133.0" text="First Name">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course10" layoutX="115.0" layoutY="602.0" text="Course 10">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course9" layoutX="127.0" layoutY="563.0" text="Course 9">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course8" layoutX="127.0" layoutY="521.0" text="Course 8">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course7" layoutX="127.0" layoutY="478.0" text="Course 7">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course6" layoutX="127.0" layoutY="438.0" text="Course 6">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course5" layoutX="127.0" layoutY="399.0" text="Course 5">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course4" layoutX="127.0" layoutY="362.0" text="Course 4">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="course3" layoutX="127.0" layoutY="324.0" text="Course 3">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="goback" layoutX="17.0" layoutY="35.0" mnemonicParsing="false" onAction="#backbutton" prefHeight="35.0" prefWidth="87.0" text="Back" />
+   </children>
+</AnchorPane>

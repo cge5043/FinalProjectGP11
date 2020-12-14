@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -38,8 +39,11 @@
       <Button fx:id="advancedSearch" layoutX="594.0" layoutY="320.0" mnemonicParsing="false" onAction="#advancedSearch1" prefHeight="28.0" prefWidth="139.0" text="Advanced Search" />
       <Button fx:id="showDetail" layoutX="388.0" layoutY="360.0" mnemonicParsing="false" onAction="#showDetailButton" prefHeight="28.0" prefWidth="99.0" text="Show Detail" />
       <Button fx:id="showDetailwindow" layoutX="558.0" layoutY="360.0" mnemonicParsing="false" onAction="#showDetailPlace" prefHeight="28.0" prefWidth="175.0" text="Show Details in Place" />
-      <Button fx:id="logOutButton" layoutX="782.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
-      <Button fx:id="toDoListButton" layoutX="770.0" layoutY="83.0" mnemonicParsing="false" onAction="#showToDoList" text="To Do List" />
-      <Button fx:id="mailboxButton" layoutX="782.0" layoutY="48.0" mnemonicParsing="false" onAction="#openMailbox" text="Mailbox" />
+      <Button fx:id="backButton" layoutX="39.0" layoutY="28.0" mnemonicParsing="false" onAction="#backButton1" prefHeight="36.0" prefWidth="63.0" text="Back" />
+      <Label layoutX="320.0" layoutY="21.0" text="Courses Menu">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
