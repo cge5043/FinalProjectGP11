@@ -80,7 +80,7 @@ public class CreateProfessorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        manager = (EntityManager) Persistence.createEntityManagerFactory("ProfessorFxmlPU").createEntityManager();
+        manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
     }
 
     @FXML
