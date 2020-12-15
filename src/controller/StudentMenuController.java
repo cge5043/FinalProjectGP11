@@ -131,6 +131,9 @@ public class StudentMenuController implements Initializable {
     
     @FXML
     private Button toDoListButton;
+    
+    @FXML
+    private Button groupMenuButton;
 
     @FXML
     void createStudent(ActionEvent event) throws IOException {
@@ -456,5 +459,28 @@ public class StudentMenuController implements Initializable {
         stage.setScene(tableViewScene);
         stage.show();
     }
+    
+    
+    @FXML
+    void showGroupMenu(ActionEvent event) throws IOException {
+        System.out.println("clicked");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GroupMenuView.fxml"));
+
+        Parent homeLoader = loader.load();
+        Scene tableViewScene = new Scene(homeLoader);
+
+        GroupMenuController home = loader.getController();
+
+        
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        home.setPreviousScene(currentScene);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setScene(tableViewScene);
+        stage.show();
+    }
+    
+    
 
 }

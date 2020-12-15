@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.GroupMenuController">
+    <children>
+       <Button fx:id="createbutton" layoutX="683.0" layoutY="75.0" mnemonicParsing="false" onAction="#createGroup" prefHeight="28.0" prefWidth="124.0" text="Create" />
+      <Button fx:id="readbutton" layoutX="525.0" layoutY="75.0" mnemonicParsing="false" onAction="#readAll" prefHeight="28.0" prefWidth="124.0" text="Read all" />
+      <Button fx:id="updatebutton" layoutX="833.0" layoutY="75.0" mnemonicParsing="false" onAction="#updateGroup" prefHeight="28.0" prefWidth="124.0" text="Update" />
+      <Button fx:id="searchbygroupname" layoutX="843.0" layoutY="227.0" mnemonicParsing="false" onAction="#readByGroupName" prefHeight="28.0" prefWidth="156.0" text="Search By Group Name" />
+      <Button fx:id="readbycourse" layoutX="843.0" layoutY="272.0" mnemonicParsing="false" onAction="#readByCourse" prefHeight="28.0" prefWidth="124.0" text="Search By Course" />
+      <Button fx:id="searchButton" layoutX="843.0" layoutY="180.0" mnemonicParsing="false" onAction="#searchButton1" prefHeight="28.0" prefWidth="68.0" text="Search" />
+      <TableView fx:id="CourseTable" layoutX="69.0" layoutY="400.0" prefHeight="334.0" prefWidth="1353.0">
+        <columns>
+          <TableColumn fx:id="idColum" prefWidth="82.0" text="ID" />
+            <TableColumn fx:id="groupnameColum" prefWidth="100.0" text="Group Name" />
+            <TableColumn fx:id="courseColum" prefWidth="106.0" text="Course" />
+            <TableColumn fx:id="memberColum1" prefWidth="106.0" text="Member1" />
+            <TableColumn fx:id="memberColum2" prefWidth="106.0" text="Member2" />
+            <TableColumn fx:id="memberColum3" prefWidth="106.0" text="Member3" />
+            <TableColumn fx:id="memberColum4" prefWidth="106.0" text="Member4" />
+            <TableColumn fx:id="memberColum5" prefWidth="106.0" text="Member5" />
+            <TableColumn fx:id="memberColum6" prefWidth="106.0" text="Member6" />
+            <TableColumn fx:id="memberColum7" prefWidth="106.0" text="Member7" />
+            <TableColumn fx:id="memberColum8" prefWidth="106.0" text="Member8" />
+            <TableColumn fx:id="memberColum9" prefWidth="106.0" text="Member9" />
+            <TableColumn fx:id="memberColum10" prefWidth="106.0" text="Member10" />
+        </columns>
+      </TableView>
+      <Line endX="1482.0" layoutX="8.0" layoutY="127.0" startX="-8.0" />
+      <Text layoutX="668.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Group" wrappingWidth="175.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="537.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Group ID:" wrappingWidth="115.79998779296875" />
+      <TextField fx:id="searchBar" layoutX="658.0" layoutY="184.0" prefHeight="23.0" prefWidth="175.0" />
+      <TextField fx:id="searchBar1" layoutX="658.0" layoutY="230.0" prefHeight="23.0" prefWidth="175.0" />
+      <TextField fx:id="searchBar2" layoutX="658.0" layoutY="275.0" prefHeight="23.0" prefWidth="175.0" />
+      <Text layoutX="537.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Group Name:" wrappingWidth="115.79998779296875" />
+      <Text layoutX="537.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Course:" wrappingWidth="115.79998779296875" />
+      <Text layoutX="677.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group Page" wrappingWidth="175.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button fx:id="backButton" layoutX="37.0" layoutY="25.0" mnemonicParsing="false" onAction="#backButton1" prefHeight="36.0" prefWidth="63.0" text="Back" />
+    </children>
+</AnchorPane>
