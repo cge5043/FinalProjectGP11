@@ -3,12 +3,12 @@
   <persistence-unit name="YuanHaoHsuFXMLPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>model.Course</class>
-    <class>model.Todolist</class>
     <class>model.Login</class>
     <class>model.Mailbox</class>
     <class>model.Groups</class>
     <class>model.Professor</class>
     <class>model.Student</class>
+    <class>model.Todolist</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/gp11_db;create=true "/>
       <property name="javax.persistence.jdbc.user" value="APP"/>
