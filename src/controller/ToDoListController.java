@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
@@ -19,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -54,6 +57,9 @@ public class ToDoListController {
     
     @FXML
     private TextField searchBar;
+    
+    @FXML
+    private Button backButton;
     //End
 
 
@@ -140,5 +146,27 @@ public class ToDoListController {
         todolistTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //ToDoList End
         
-    }    
+    }
+    
+    Scene previousScene;
+    //Source: Demo Code
+    public void setPreviousScene(Scene scene) {
+        previousScene = scene;
+        backButton.setDisable(false);
+
+    }
+    
+    @FXML
+    void backButton1(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            
+        if (previousScene != null) {
+            stage.setScene(previousScene);
+        }
+    }
+    
+    Todolist selectedModel;
+    public void initData(Todolist model) {
+        selectedModel = model;
+    }
 }

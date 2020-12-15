@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectionMenuController">
+   <children>
+      <Button fx:id="studentViewButton" layoutX="30.0" layoutY="167.0" mnemonicParsing="false" onAction="#openStudentView" prefHeight="85.0" prefWidth="206.0" text="Student" />
+      <Button fx:id="professorViewButton" layoutX="359.0" layoutY="166.0" mnemonicParsing="false" onAction="#openProfessorView" prefHeight="86.0" prefWidth="206.0" text="Professor" />
+      <Label layoutX="207.0" layoutY="34.0" text="Selection">
+         <font>
+            <Font name="System Bold" size="43.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

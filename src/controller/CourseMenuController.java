@@ -33,12 +33,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import model.Course;
+import model.Todolist;
 
 /**
  *
  * @author a9512
  */
-public class FXMLDocumentController implements Initializable {
+public class CourseMenuController implements Initializable {
     //Start of Course
     @FXML
     private Label label;
@@ -87,6 +88,9 @@ public class FXMLDocumentController implements Initializable {
     private Button showDetail;
     @FXML
     private Button showDetailwindow;
+
+    
+
     
     @FXML
     void showDetailPlace(ActionEvent event) throws IOException {
@@ -446,7 +450,35 @@ public class FXMLDocumentController implements Initializable {
         majorColum.setCellValueFactory(new PropertyValueFactory<>("major"));
         CourseTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //Course End
-    }    
+    }
+    
+
+    Scene previousScene;
+    public void setPreviousScene(Scene scene) {
+        Scene previousScene = scene;
+        //backButton.setDisable(false);
+    }
+    
+    @FXML
+    void backButton1(ActionEvent event) throws IOException {
+        System.out.println("clicked");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentMenuView.fxml"));
+
+        Parent studentMenuView = loader.load();
+        Scene tableViewScene = new Scene(studentMenuView);
+
+        StudentMenuController home = loader.getController();
+
+        
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        home.setPreviousScene(currentScene);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setScene(tableViewScene);
+        stage.show();
+    }
+    
 
 }        
 
