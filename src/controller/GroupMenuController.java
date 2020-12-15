@@ -112,7 +112,7 @@ public class GroupMenuController implements Initializable {
 
     @FXML
     private void createGroup(ActionEvent event) throws IOException {
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/createGroup.fxml"));
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/createGroup.fxml"));
 
         Parent createGroupLoader = loader.load();
         Scene tableViewScene = new Scene(createGroupLoader);
@@ -157,7 +157,7 @@ public class GroupMenuController implements Initializable {
 
     @FXML
     private void updateGroup(ActionEvent event) throws IOException {
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/updateGroup.fxml"));
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/updateGroup.fxml"));
 
         Parent updateGroupLoader = loader.load();
         Scene tableViewScene = new Scene(updateGroupLoader);
