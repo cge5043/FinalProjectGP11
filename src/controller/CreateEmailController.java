@@ -48,7 +48,6 @@ public class CreateEmailController implements Initializable {
    //sent an email
     @FXML
     private void sentemail(ActionEvent event) {
-        emailaddress.setText("Ykh5156");
         String title = emailtitle.getText();
         String address = emailaddress.getText();
         String emailtext = labelText.getText();
