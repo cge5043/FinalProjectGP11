@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateEmailController">
+     <children>
+      <Label layoutX="158.0" layoutY="3.0" prefHeight="42.0" prefWidth="296.0" text="Create Email">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="labelText" layoutX="45.0" layoutY="192.0" prefHeight="348.0" prefWidth="418.0" wrapText="true" />
+      <Text layoutX="45.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Address: ">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <TextField fx:id="emailaddress" layoutX="203.0" layoutY="53.0" prefHeight="23.0" prefWidth="206.0" />
+      <Text layoutX="82.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Title:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <TextField fx:id="emailtitle" layoutX="201.0" layoutY="97.0" prefHeight="23.0" prefWidth="212.0" />
+      <Text layoutX="202.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Text">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Button fx:id="buttonsent" layoutX="207.0" layoutY="581.0" mnemonicParsing="false" onAction="#sentemail" prefHeight="42.0" prefWidth="95.0" text="Sent">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
