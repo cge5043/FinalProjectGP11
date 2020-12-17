@@ -8,13 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MailboxMenuController">
+<AnchorPane id="AnchorPane" prefHeight="525.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SentMailController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Button fx:id="buttonCreateEmail" layoutX="195.0" layoutY="126.0" mnemonicParsing="false" onAction="#createEmail" text="Send a  Email" />
-      <Button fx:id="buttonReadByEmailAddress" layoutX="489.0" layoutY="107.0" mnemonicParsing="false" onAction="#readAllEmails" prefHeight="42.0" prefWidth="122.0" text="Read All Emails" />
-      <Button fx:id="buttonDeleteEmail" layoutX="316.0" layoutY="126.0" mnemonicParsing="false" onAction="#deleteEmail" text="Delete Email" />
-      <Label layoutX="567.0" layoutY="18.0" text="MailBox">
+      <Button fx:id="buttonDeleteEmail" layoutX="81.0" layoutY="107.0" mnemonicParsing="false" onAction="#deleteEmail" prefHeight="42.0" prefWidth="134.0" text="Delete Email" />
+      <Label layoutX="548.0" layoutY="18.0" text="Sent MailBox">
          <font>
             <Font size="32.0" />
          </font></Label>
@@ -24,19 +22,19 @@
       <TableView fx:id="emailTable" layoutX="81.0" layoutY="163.0" prefHeight="266.0" prefWidth="1094.0">
         <columns>
           <TableColumn fx:id="canvasaccountid" prefWidth="67.99999713897705" text="ID" />
-          <TableColumn fx:id="emailsender" prefWidth="185.59998321533203" text="Sender" />
+          <TableColumn fx:id="emailsender" prefWidth="185.59998321533203" text="Send To" />
             <TableColumn fx:id="emailtitle" prefWidth="197.60003662109375" text="Email Title" />
             <TableColumn fx:id="emailtext" prefWidth="544.0001831054688" text="Email Text" />
             <TableColumn fx:id="emaildate" minWidth="0.0" prefWidth="97.599853515625" text="Date" />
         </columns>
       </TableView>
-      <TextField fx:id="textboxSender" layoutX="459.0" layoutY="64.0" prefHeight="26.0" prefWidth="373.0" promptText="Enter Email Sender" />
-      <Label layoutX="359.0" layoutY="65.0" text="By Sender:">
+      <TextField fx:id="textboxSender" layoutX="459.0" layoutY="64.0" prefHeight="26.0" prefWidth="373.0" promptText="Enter Email Reciever" />
+      <Label layoutX="355.0" layoutY="65.0" text="By Reciever:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButton1" prefHeight="50.0" prefWidth="97.0" text="Back" />
-      <Button fx:id="viewSent" layoutX="639.0" layoutY="107.0" mnemonicParsing="false" onAction="#viewSentEmail" prefHeight="42.0" prefWidth="122.0" text="View Sent Emails" />
+      <Button fx:id="viewSent" layoutX="575.0" layoutY="107.0" mnemonicParsing="false" onAction="#viewSentEmail" prefHeight="42.0" prefWidth="142.0" text="Show All Sent Emails" />
     </children>
 </AnchorPane>

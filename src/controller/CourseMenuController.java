@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,7 +32,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import model.Course;
-import model.Todolist;
+
 
 /**
  *
@@ -91,7 +90,7 @@ public class CourseMenuController implements Initializable {
 
     
 
-    
+   // show course detail in one window
     @FXML
     void showDetailPlace(ActionEvent event) throws IOException {
         System.out.println("clicked");
@@ -119,7 +118,7 @@ public class CourseMenuController implements Initializable {
         stage.show();
     }
 
-    
+    //show detail with pop up window
      @FXML
     void showDetailButton(ActionEvent event) throws IOException {
        System.out.println("clicked");
@@ -149,7 +148,7 @@ public class CourseMenuController implements Initializable {
         stage.show();
     }
 
-    
+    // course advance search
      @FXML
     void advancedSearch1(ActionEvent event) {
         //source: demo code
@@ -195,48 +194,71 @@ public class CourseMenuController implements Initializable {
     }
     
 //Source:Demo Code
+    //create course
     @FXML
-    void createCourse(ActionEvent event) {
-       Scanner input = new Scanner(System.in);
+    void createCourse(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/createCourse.fxml"));
+
+        Parent createCourseLoader = loader.load();
+        Scene tableViewScene = new Scene(createCourseLoader);
+
+        CreateCourseController courseCreate = loader.getController();
+
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        courseCreate.setPreviousScene(currentScene);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setScene(tableViewScene);
+        stage.show();
         
-    
-        System.out.println("Enter Course ID:");
-        int id = input.nextInt();
         
-        System.out.println("Enter Course Name:");
-        String name = input.next();
         
-        System.out.println("Enter Course Major:");
-        String major = input.next();
         
-        System.out.println("Enter Professor Name:");
-        String proname = input.next();
         
-       
-        Course courses = new Course();
         
-       
-        courses.setId(id);
-        courses.setName(name);
-        courses.setMajor(major);
-        courses.setProname(proname);
-           
-        create(courses);
+     
     }
 //source: demo code
+    //delete course
     @FXML
     void deleteCourse(ActionEvent event) {
-        Scanner input = new Scanner(System.in);
+         Course selectedCourse = CourseTable.getSelectionModel().getSelectedItem();
+
+        initData(selectedCourse);
         
-        System.out.println("Enter Course ID:");
-        int id = input.nextInt();
-        
-        Course s = readById(id);
-        System.out.println("we are deleting this course: "+ s.toString());
-        delete(s);
 
     }
+      // delete end
+    Course selectedModel;
+// get selected model's id
+    public void initData(Course model) {
+        selectedModel = model;
+        int id = model.getId();
+        Course courses = deleteById(id);
+        delete(courses);
+
+    }
+    //code end
+    
+    
+    //source: demo code
+    //delete course operation
+public Course deleteById(int id){
+        Query query = manager.createNamedQuery("Course.findById");
+        
+        query.setParameter("id", id);
+        
+        Course courses = (Course) query.getSingleResult();
+        if (courses != null) {
+            System.out.println(courses.getId() + " " + courses.getName() + " " + courses.getMajor()+" "+courses.getProname());
+        }
+        
+        return courses;
+    }        
+
+
     //Source:Demo Code
+//read all course
     @FXML
     void readCourse(ActionEvent event) {
         Query query = manager.createNamedQuery("Course.findAll");
@@ -245,70 +267,89 @@ public class CourseMenuController implements Initializable {
         for (Course s : courses) {
             System.out.println(s.getId() + " " + s.getName() + " " + s.getMajor()+" "+s.getProname());
         }
+         setTableData(courses);
         
     }
     //source:demo code
+    //update course
     @FXML
-    void updateCourse(ActionEvent event) {
-       Scanner input = new Scanner(System.in);
+    void updateCourse(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/courseUpdate.fxml"));
+
+        Parent updateCourseLoader = loader.load();
+        Scene tableViewScene = new Scene(updateCourseLoader);
+
+        CourseUpdateController courseUpdate = loader.getController();
+
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        courseUpdate.setPreviousScene(currentScene);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setScene(tableViewScene);
+        stage.show();
+
         
-        System.out.println("Enter Course ID:");
-        int id = input.nextInt();
         
-        System.out.println("Enter Course Name:");
-        String name = input.next();
-        
-        System.out.println("Enter Course Major:");
-        String major = input.next();
-        
-        System.out.println("Enter Course Professor Name:");
-        String proname = input.next();
-        
-        Course courses = new Course();
-        
-        courses.setId(id);
-        courses.setName(name);
-        courses.setMajor(major);
-        courses.setProname(proname);   
-        update(courses);
-        System.out.println("Course Updated");
     }
     
-    //source: demo code
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        Query query = manager.createNamedQuery("Course.findAll");
-        List<Course> data = query.getResultList();
-
-        for (Course s : data) {
-            System.out.println(s.getId() + " " + s.getName() + " " + s.getMajor()+" "+s.getProname());
-        }
-    }
+  
     
     //Source: demo code
+    // search course by id
      @FXML
     void readByID(ActionEvent event) {
-       Scanner input = new Scanner(System.in);
+       //Scanner input = new Scanner(System.in);
         
-        System.out.println("Enter Course ID:");
-        int id = input.nextInt();
+      //  System.out.println("Enter Course ID:");
         
-        Course s = readById(id);
+        
+       // int id = input.nextInt();
+        
+        
+        String courseid = searchBar.getText();
+        int courseidtoint = Integer.parseInt(courseid);
+        int integerid = courseidtoint;
+        List<Course> s = readById(integerid);
+        
+         if (s == null || s.isEmpty()) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Search Dialog Box");
+            alert.setHeaderText("Search Results");
+            alert.setContentText("No Course Found");
+            alert.showAndWait(); 
+        } 
+        else {
+            setTableData(s);
+        }
+       // Course s = readById(id);
         System.out.println(s.toString());
     }
+    // code end
     
     //source: demo code
+    //search course by major
     @FXML
     void readByMajor(ActionEvent event) {
-        Scanner input = new Scanner(System.in);
+       // Scanner input = new Scanner(System.in);
         
-        System.out.println("Enter Major:");
-        String major = input.next();
+      //  System.out.println("Enter Major:");
+      //  String major = input.next();
+        String major = searchBar.getText();
         List<Course> s = readByMajor(major);
+         if (s == null || s.isEmpty()) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Search Dialog Box");
+            alert.setHeaderText("Search Results");
+            alert.setContentText("No Course Found");
+            alert.showAndWait(); 
+        } 
+        else {
+            setTableData(s);
+        }
         System.out.println(s.toString());
     }
-    
+    //code end
+    //search course by course name
      @FXML
     void searchButton1(ActionEvent event) {
         System.out.println("Clicked");
@@ -326,34 +367,24 @@ public class CourseMenuController implements Initializable {
             setTableData(courses);
         }
     }
-    
+    //code end
     //Source:Demo Code
-    public void create(Course courses) {
-        try {
-            manager.getTransaction().begin();
-            if (courses.getId() != null) {
-                manager.persist(courses);
-                manager.getTransaction().commit();
-                System.out.println(courses.toString() + " is created");
-            }
-        }
-        catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
+  
     
     //source: demo code
-    public Course readById(int id){
+    //readby id operation
+    public List<Course> readById(int id){
         Query query = manager.createNamedQuery("Course.findById");
         query.setParameter("id", id);
-        Course courses = (Course) query.getSingleResult();
-        if (courses != null) {
-            System.out.println(courses.getId() + " " + courses.getName() + " " + courses.getMajor()+" "+courses.getProname());
+        List<Course> courses = query.getResultList();
+       for (Course s : courses) {
+            System.out.println(s.getId() + " " + s.getName() + " " + s.getMajor()+" "+s.getProname());
         }
         return courses;
     }
     
     //source:demo code
+    //delete course operation
     public void delete(Course courses) {
         try {
             Course existingCourse = manager.find(Course.class, courses.getId());
@@ -365,6 +396,10 @@ public class CourseMenuController implements Initializable {
                 manager.remove(existingCourse);
                 
                 manager.getTransaction().commit();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Delete Dialog Box");
+                alert.setHeaderText("Course Deleted");
+                alert.showAndWait();
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -372,24 +407,8 @@ public class CourseMenuController implements Initializable {
     }
     
     //Source: Demo Code
-    public void update(Course model) {
-        try {
-
-            Course existingCourse = manager.find(Course.class, model.getId());
-
-            if (existingCourse != null) {
-                manager.getTransaction().begin();
-                existingCourse.setName(model.getName());
-                existingCourse.setMajor(model.getMajor());
-                existingCourse.setProname(model.getProname());
-                manager.getTransaction().commit();
-            }
-        } 
-        catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
      //source: demo code
+    //read by major operation
       public List<Course> readByMajor(String major){
         Query query = manager.createNamedQuery("Course.findByMajor");
         
@@ -404,6 +423,7 @@ public class CourseMenuController implements Initializable {
     }
       
     //Source:Demo Code
+      //read by course name operation
     public List<Course> readByCourse(String name) {
         Query query = manager.createNamedQuery("Course.findByName");
 
@@ -418,6 +438,7 @@ public class CourseMenuController implements Initializable {
     }
      
     //source:demo code
+    // read by course advanced operation
     public List<Course> readByCourseAdvanced(String name) {
         Query query = manager.createNamedQuery("Course.findByCourseNameAdvanced");
 
@@ -458,17 +479,17 @@ public class CourseMenuController implements Initializable {
         Scene previousScene = scene;
         //backButton.setDisable(false);
     }
-    
+    //back to home screen
     @FXML
     void backButton1(ActionEvent event) throws IOException {
         System.out.println("clicked");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeScreen.fxml"));
 
-        Parent studentMenuView = loader.load();
-        Scene tableViewScene = new Scene(studentMenuView);
+        Parent HomeScreen = loader.load();
+        Scene tableViewScene = new Scene(HomeScreen);
 
-        StudentMenuController home = loader.getController();
+        HomeScreenController home = loader.getController();
 
         
         Scene currentScene = ((Node) event.getSource()).getScene();

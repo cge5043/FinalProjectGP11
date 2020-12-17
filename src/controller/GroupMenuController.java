@@ -36,7 +36,7 @@ import javax.persistence.Query;
  * @author a9512
  */
 public class GroupMenuController implements Initializable {
-    
+
     private Label label;
     @FXML
     private Button createbutton;
@@ -73,28 +73,29 @@ public class GroupMenuController implements Initializable {
     @FXML
     private TableColumn<Groups, String> memberColum7;
     @FXML
-    private TableColumn<Groups,String> memberColum8;
+    private TableColumn<Groups, String> memberColum8;
     @FXML
     private TableColumn<Groups, String> memberColum9;
     @FXML
-    private TableColumn<Groups,String> memberColum10;
+    private TableColumn<Groups, String> memberColum10;
     @FXML
     private TextField searchBar;
     @FXML
     private TextField searchBar1;
     @FXML
     private TextField searchBar2;
-    
+
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-   EntityManager manager; 
+    EntityManager manager;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
+        manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
         // TODO
-            //Source: Demo Code    
+        //Source: Demo Code    
         idColum.setCellValueFactory(new PropertyValueFactory<>("groupid"));
         groupnameColum.setCellValueFactory(new PropertyValueFactory<>("groupname"));
         courseColum.setCellValueFactory(new PropertyValueFactory<>("courseattribute"));
@@ -108,11 +109,12 @@ public class GroupMenuController implements Initializable {
         memberColum8.setCellValueFactory(new PropertyValueFactory<>("member8"));
         memberColum9.setCellValueFactory(new PropertyValueFactory<>("member9"));
         memberColum10.setCellValueFactory(new PropertyValueFactory<>("member10"));
-    }    
+    }
+    // create group
 
     @FXML
     private void createGroup(ActionEvent event) throws IOException {
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/createGroup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/createGroup.fxml"));
 
         Parent createGroupLoader = loader.load();
         Scene tableViewScene = new Scene(createGroupLoader);
@@ -125,12 +127,14 @@ public class GroupMenuController implements Initializable {
         Stage stage = (Stage) currentScene.getWindow();
         stage.setScene(tableViewScene);
         stage.show();
-        
+
     }
 
+    //create group end
+    //read all groups
     @FXML
     private void readAll(ActionEvent event) {
-         //source:demo code
+        //source:demo code
         Query query = manager.createNamedQuery("Groups.findAll");
         List<Groups> data = query.getResultList();
 
@@ -140,7 +144,8 @@ public class GroupMenuController implements Initializable {
         }
         setTableData(data);
     }
-    
+    //read end
+
     //Source: Demo Code
     private ObservableList<Groups> groupsData;
 
@@ -154,10 +159,11 @@ public class GroupMenuController implements Initializable {
         CourseTable.setItems(groupsData);
         CourseTable.refresh();
     }
+// update group, transit to upadate scene
 
     @FXML
     private void updateGroup(ActionEvent event) throws IOException {
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/updateGroup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/updateGroup.fxml"));
 
         Parent updateGroupLoader = loader.load();
         Scene tableViewScene = new Scene(updateGroupLoader);
@@ -170,12 +176,14 @@ public class GroupMenuController implements Initializable {
         Stage stage = (Stage) currentScene.getWindow();
         stage.setScene(tableViewScene);
         stage.show();
-        
-    }
 
+    }
+// update end
+
+// read by group name
     @FXML
     private void readByGroupName(ActionEvent event) {
-          //source:Demo code
+        //source:Demo code
         System.out.println("clicked");
 
         String groupName = searchBar1.getText();
@@ -194,20 +202,23 @@ public class GroupMenuController implements Initializable {
             setTableData(groups);
         }
     }
-    
-     public List<Groups> readByGroupName(String groupname) {
+    // read end
+    // read by group name operation
+
+    public List<Groups> readByGroupName(String groupname) {
         Query query = manager.createNamedQuery("Groups.findByGroupname");
 
         query.setParameter("groupname", groupname);
 
         List<Groups> groups = query.getResultList();
         for (Groups g : groups) {
-             System.out.println(g.getGroupid() + " " + g.getGroupname() + " " + g.getCourseattribute() + " " + g.getMember1() + " " + g.getMember2() + " " + g.getMember3()
+            System.out.println(g.getGroupid() + " " + g.getGroupname() + " " + g.getCourseattribute() + " " + g.getMember1() + " " + g.getMember2() + " " + g.getMember3()
                     + " " + g.getMember4() + " " + g.getMember5() + " " + g.getMember6() + " " + g.getMember7() + " " + g.getMember8() + " " + g.getMember9() + " " + g.getMember10());
         }
 
         return groups;
     }
+// read by course
 
     @FXML
     private void readByCourse(ActionEvent event) {
@@ -230,30 +241,31 @@ public class GroupMenuController implements Initializable {
             setTableData(groups);
         }
     }
-    
-       public List<Groups> readByCourse(String courseattribute) {
+
+    // read by course operation
+    public List<Groups> readByCourse(String courseattribute) {
         Query query = manager.createNamedQuery("Groups.findByCourseattribute");
 
         query.setParameter("courseattribute", courseattribute);
 
         List<Groups> groups = query.getResultList();
         for (Groups g : groups) {
-             System.out.println(g.getGroupid() + " " + g.getGroupname() + " " + g.getCourseattribute() + " " + g.getMember1() + " " + g.getMember2() + " " + g.getMember3()
+            System.out.println(g.getGroupid() + " " + g.getGroupname() + " " + g.getCourseattribute() + " " + g.getMember1() + " " + g.getMember2() + " " + g.getMember3()
                     + " " + g.getMember4() + " " + g.getMember5() + " " + g.getMember6() + " " + g.getMember7() + " " + g.getMember8() + " " + g.getMember9() + " " + g.getMember10());
         }
 
         return groups;
     }
+// search by group id
 
     @FXML
     private void searchButton1(ActionEvent event) {
-         //source:Demo code
+        //source:Demo code
         System.out.println("clicked");
 
         String Groupid = searchBar.getText();
         int groupidtoint = Integer.parseInt(Groupid);
         int integerid = groupidtoint;
-
 
         List<Groups> groups = readByGroupid(integerid);
 
@@ -268,11 +280,11 @@ public class GroupMenuController implements Initializable {
 
             setTableData(groups);
         }
-        
+
     }
-    
-      
-       //source:demo code
+
+    // search by group id operation   
+    //source:demo code
     public List<Groups> readByGroupid(Integer id) {
         Query query = manager.createNamedQuery("Groups.findByGroupid");
 
@@ -286,28 +298,29 @@ public class GroupMenuController implements Initializable {
 
         return groups;
     }
-    
+
     Scene previousScene;
+
     public void setPreviousScene(Scene scene) {
         previousScene = scene;
     }
-    
+
     @FXML
     private Button backButton;
-    
-    
+
+    // back to home screen
     @FXML
     void backButton1(ActionEvent event) throws IOException {
+        System.out.print("hi");
         System.out.println("clicked");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeScreen.fxml"));
 
-        Parent homeLoader = loader.load();
-        Scene tableViewScene = new Scene(homeLoader);
+        Parent HomeScreen = loader.load();
+        Scene tableViewScene = new Scene(HomeScreen);
 
-        StudentMenuController home = loader.getController();
+        HomeScreenController home = loader.getController();
 
-        
         Scene currentScene = ((Node) event.getSource()).getScene();
         home.setPreviousScene(currentScene);
 
@@ -315,6 +328,5 @@ public class GroupMenuController implements Initializable {
         stage.setScene(tableViewScene);
         stage.show();
     }
-        
-    
+
 }

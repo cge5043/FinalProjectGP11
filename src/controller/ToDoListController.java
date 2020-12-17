@@ -36,8 +36,8 @@ import model.Todolist;
  * @author a9512
  */
 public class ToDoListController implements Initializable {
-    
-        @FXML // ResourceBundle that was given to the FXMLLoader
+
+    @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
@@ -63,7 +63,7 @@ public class ToDoListController implements Initializable {
 
     @FXML // fx:id="searchButton"
     private Button searchButton; // Value injected by FXMLLoader
-    
+
     @FXML
     private Button assigndetail;
 
@@ -71,23 +71,20 @@ public class ToDoListController implements Initializable {
     void searchButton1(ActionEvent event) {
         //source: demo code
         System.out.println("clicked");
-       
+
         String courseid = searchBar.getText();
 
-    
         List<Todolist> todolists = readByCourseid(courseid);
 
-     
         if (todolists == null || todolists.isEmpty()) {
 
-           
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Search Dialog Box");
             alert.setHeaderText("Search Results");
             alert.setContentText("No Course Found");
-            alert.showAndWait(); 
+            alert.showAndWait();
         } else {
-           
+
             setTableData(todolists);
         }
 
@@ -96,7 +93,7 @@ public class ToDoListController implements Initializable {
     @FXML
     void showAll(ActionEvent event) {
         //source:demo code
-         Query query = manager.createNamedQuery("Todolist.findAll");
+        Query query = manager.createNamedQuery("Todolist.findAll");
         List<Todolist> data = query.getResultList();
 
         for (Todolist t : data) {
@@ -104,100 +101,98 @@ public class ToDoListController implements Initializable {
         }
         setTableData(data);
     }
-    
-    //Source: Demo Code
-        private ObservableList<Todolist> todolistData;
 
-    
+    //Source: Demo Code
+    private ObservableList<Todolist> todolistData;
+
     public void setTableData(List<Todolist> todolist) {
 
-        
         todolistData = FXCollections.observableArrayList();
 
-        
         todolist.forEach(t -> {
             todolistData.add(t);
         });
         todolistTable.setItems(todolistData);
         todolistTable.refresh();
     }
-    
+
     @FXML
     void showdetails(ActionEvent event) throws IOException {
         //Source: Demo Code  
         Todolist selectedAssignment = todolistTable.getSelectionModel().getSelectedItem();
-        if(selectedAssignment==null){
+        if (selectedAssignment == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error Information");
             alert.setHeaderText("Course Not Selected");
             alert.setContentText("Please Select a Course");
-            alert.showAndWait(); 
-        }
-        else{
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/todolistdetails.fxml"));
+            alert.showAndWait();
+        } else {
 
-        Parent todolistdetails = loader.load();
-      
-        Scene textViewScene = new Scene(todolistdetails);
-      
-        TodolistdetailsController detailedControlled = loader.getController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/todolistdetails.fxml"));
 
-        detailedControlled.initData(selectedAssignment);
-   
-        Stage stage = new Stage();
-        stage.setScene(textViewScene);
-        stage.show();
+            Parent todolistdetails = loader.load();
+
+            Scene textViewScene = new Scene(todolistdetails);
+
+            TodolistdetailsController detailedControlled = loader.getController();
+
+            detailedControlled.initData(selectedAssignment);
+
+            Stage stage = new Stage();
+            stage.setScene(textViewScene);
+            stage.show();
         }
     }
-    
 
     EntityManager manager;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-         //Source:Demo Code
+        //Source:Demo Code
         manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
-        
+
         //Source: Demo Code
-         DueColum.setCellValueFactory(new PropertyValueFactory<>("duedate"));
+        DueColum.setCellValueFactory(new PropertyValueFactory<>("duedate"));
         idColum.setCellValueFactory(new PropertyValueFactory<>("courseid"));
         AssignmentColum.setCellValueFactory(new PropertyValueFactory<>("assignments"));
 
         todolistTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-    }    
-    //source:demo code
-     public List<Todolist> readByCourseid(String id) {
-        Query query = manager.createNamedQuery("Todolist.findByCourseid");
+    }
 
+    //source:demo code
+    public List<Todolist> readByCourseid(String id) {
+        Query query = manager.createNamedQuery("Todolist.findByCourseid");
 
         query.setParameter("courseid", id);
 
-
         List<Todolist> todolists = query.getResultList();
         for (Todolist todolist : todolists) {
-            System.out.println(todolist.getCourseid()+ " " + todolist.getDuedate()+ " " + todolist.getAssignments());
+            System.out.println(todolist.getCourseid() + " " + todolist.getDuedate() + " " + todolist.getAssignments());
         }
 
         return todolists;
     }
     Scene previousScene;
+
     public void setPreviousScene(Scene scene) {
         previousScene = scene;
     }
-    
-    
+
     @FXML
     private Button goback;
-    
-        @FXML
+
+    @FXML
     void backbutton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentMenuView.fxml"));
+        System.out.print("hi");
+        System.out.println("clicked");
 
-        Parent HomeLoader = loader.load();
-        Scene tableViewScene = new Scene(HomeLoader);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeScreen.fxml"));
 
-        StudentMenuController home = loader.getController();
+        Parent HomeScreen = loader.load();
+        Scene tableViewScene = new Scene(HomeScreen);
+
+        HomeScreenController home = loader.getController();
 
         Scene currentScene = ((Node) event.getSource()).getScene();
         home.setPreviousScene(currentScene);
@@ -206,6 +201,5 @@ public class ToDoListController implements Initializable {
         stage.setScene(tableViewScene);
         stage.show();
     }
-  
-    
+
 }

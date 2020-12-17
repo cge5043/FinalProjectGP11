@@ -9,6 +9,7 @@
     <class>model.Professor</class>
     <class>model.Student</class>
     <class>model.Todolist</class>
+    <class>model.Sentemail</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/gp11_db;create=true "/>
       <property name="javax.persistence.jdbc.user" value="APP"/>
