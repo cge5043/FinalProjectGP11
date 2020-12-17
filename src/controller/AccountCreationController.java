@@ -74,6 +74,10 @@ public class AccountCreationController implements Initializable {
                 manager.getTransaction().commit();
 
                 System.out.println(logins.toString() + " is created");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Register Dialog Box");
+                alert.setHeaderText("Account Created");
+                alert.showAndWait();
             }
 
         } catch (Exception ex) {

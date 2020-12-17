@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,7 +13,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -29,11 +33,10 @@ import model.Todolist;
 
 /**
  *
- * @author cge19
+ * @author a9512
  */
-public class ToDoListController {
-    //Start of ToDoListController
-    
+public class ToDoListController implements Initializable {
+
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -44,8 +47,8 @@ public class ToDoListController {
     private TableView<Todolist> todolistTable; // Value injected by FXMLLoader
 
     @FXML // fx:id="idColum"
-    private TableColumn<Todolist, String> ToDoidColum; // Value injected by FXMLLoader
-    
+    private TableColumn<Todolist, String> idColum; // Value injected by FXMLLoader
+
     @FXML // fx:id="DueColum"
     private TableColumn<Todolist, String> DueColum; // Value injected by FXMLLoader
 
@@ -54,58 +57,41 @@ public class ToDoListController {
 
     @FXML // fx:id="showAssign"
     private Button showAssign; // Value injected by FXMLLoader
-    
-    @FXML
-    private TextField searchBar;
-    
-    @FXML
-    private Button backButton;
-    //End
 
+    @FXML // fx:id="searchBar"
+    private TextField searchBar; // Value injected by FXMLLoader
+
+    @FXML // fx:id="searchButton"
+    private Button searchButton; // Value injected by FXMLLoader
 
     @FXML
-    void toDoSearchButton(ActionEvent event) {
+    private Button assigndetail;
+
+    @FXML
+    void searchButton1(ActionEvent event) {
         //source: demo code
         System.out.println("clicked");
-       
-        String toDoCourseid = searchBar.getText();
 
-    
-        List<Todolist> todolists = readByCourseid(toDoCourseid);
+        String courseid = searchBar.getText();
 
-     
+        List<Todolist> todolists = readByCourseid(courseid);
+
         if (todolists == null || todolists.isEmpty()) {
 
-           
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Search Dialog Box");
             alert.setHeaderText("Search Results");
             alert.setContentText("No Course Found");
-            alert.showAndWait(); 
+            alert.showAndWait();
         } else {
-           
-            //Issue setTableData(todolists);
+
+            setTableData(todolists);
         }
 
     }
-    EntityManager manager;
-    public List<Todolist> readByCourseid(String id) {
-        Query query = manager.createNamedQuery("Todolist.findByCourseid");
 
-
-        query.setParameter("courseid", id);
-
-
-        List<Todolist> todolists = query.getResultList();
-        for (Todolist todolist : todolists) {
-            System.out.println(todolist.getCourseid()+ " " + todolist.getDuedate()+ " " + todolist.getAssignments());
-        }
-
-        return todolists;
-    }
-    
     @FXML
-    void toDoShowAll(ActionEvent event) {
+    void showAll(ActionEvent event) {
         //source:demo code
         Query query = manager.createNamedQuery("Todolist.findAll");
         List<Todolist> data = query.getResultList();
@@ -113,60 +99,107 @@ public class ToDoListController {
         for (Todolist t : data) {
             System.out.println(t.getCourseid() + " " + t.getDuedate() + " " + t.getAssignments());
         }
-        //Issue setTableData(data);
+        setTableData(data);
     }
-    
+
     //Source: Demo Code
     private ObservableList<Todolist> todolistData;
 
-    
-    public void toDoSetTableData(List<Todolist> todolist) {
+    public void setTableData(List<Todolist> todolist) {
+
         todolistData = FXCollections.observableArrayList();
+
         todolist.forEach(t -> {
             todolistData.add(t);
         });
         todolistTable.setItems(todolistData);
         todolistTable.refresh();
     }
-    
-    
 
-//End of ToDoListController
-    
+    @FXML
+    void showdetails(ActionEvent event) throws IOException {
+        //Source: Demo Code  
+        Todolist selectedAssignment = todolistTable.getSelectionModel().getSelectedItem();
+        if (selectedAssignment == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error Information");
+            alert.setHeaderText("Course Not Selected");
+            alert.setContentText("Please Select a Course");
+            alert.showAndWait();
+        } else {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/todolistdetails.fxml"));
+
+            Parent todolistdetails = loader.load();
+
+            Scene textViewScene = new Scene(todolistdetails);
+
+            TodolistdetailsController detailedControlled = loader.getController();
+
+            detailedControlled.initData(selectedAssignment);
+
+            Stage stage = new Stage();
+            stage.setScene(textViewScene);
+            stage.show();
+        }
+    }
+
+    EntityManager manager;
+
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //Source:Demo Code
         manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
-        
-        
-        //ToDoList Start
+
+        //Source: Demo Code
         DueColum.setCellValueFactory(new PropertyValueFactory<>("duedate"));
-        ToDoidColum.setCellValueFactory(new PropertyValueFactory<>("courseid"));
+        idColum.setCellValueFactory(new PropertyValueFactory<>("courseid"));
         AssignmentColum.setCellValueFactory(new PropertyValueFactory<>("assignments"));
+
         todolistTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        //ToDoList End
-        
     }
-    
+
+    //source:demo code
+    public List<Todolist> readByCourseid(String id) {
+        Query query = manager.createNamedQuery("Todolist.findByCourseid");
+
+        query.setParameter("courseid", id);
+
+        List<Todolist> todolists = query.getResultList();
+        for (Todolist todolist : todolists) {
+            System.out.println(todolist.getCourseid() + " " + todolist.getDuedate() + " " + todolist.getAssignments());
+        }
+
+        return todolists;
+    }
     Scene previousScene;
-    //Source: Demo Code
+
     public void setPreviousScene(Scene scene) {
         previousScene = scene;
-        backButton.setDisable(false);
+    }
 
-    }
-    
     @FXML
-    void backButton1(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            
-        if (previousScene != null) {
-            stage.setScene(previousScene);
-        }
+    private Button goback;
+
+    @FXML
+    void backbutton(ActionEvent event) throws IOException {
+        System.out.print("hi");
+        System.out.println("clicked");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeScreen.fxml"));
+
+        Parent HomeScreen = loader.load();
+        Scene tableViewScene = new Scene(HomeScreen);
+
+        HomeScreenController home = loader.getController();
+
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        home.setPreviousScene(currentScene);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setScene(tableViewScene);
+        stage.show();
     }
-    
-    Todolist selectedModel;
-    public void initData(Todolist model) {
-        selectedModel = model;
-    }
+
 }

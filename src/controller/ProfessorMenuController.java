@@ -106,7 +106,7 @@ public class ProfessorMenuController implements Initializable {
 
     @FXML
     void createProfessor(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/createProfessor.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/createProfessor.fxml"));
 
         Parent createProfessorLoader = loader.load();
         Scene tableViewScene = new Scene(createProfessorLoader);
@@ -287,7 +287,7 @@ public class ProfessorMenuController implements Initializable {
         }
         else{
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/professorDetail.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/professorDetail.fxml"));
 
         Parent professordetails = loader.load();
       
@@ -306,7 +306,7 @@ public class ProfessorMenuController implements Initializable {
 
     @FXML
     void updateProfessor(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/updateProfessor.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/updateProfessor.fxml"));
 
         Parent updateProfessorLoader = loader.load();
         Scene tableViewScene = new Scene(updateProfessorLoader);

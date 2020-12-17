@@ -44,7 +44,7 @@ public class MailboxMenuController implements Initializable {
 
     @FXML
     private Label label;
-    
+
     @FXML
     private Button buttonCreateEmail;
 
@@ -52,42 +52,45 @@ public class MailboxMenuController implements Initializable {
     private Button buttonDeleteEmail;
 
     @FXML
-    private Button buttonReadByID;
-
-    @FXML
     private Button buttonReadByEmailAddress;
 
     @FXML
-    private Button buttonUpdate;
+    private TextField textboxSender;
 
     @FXML
-    private Button buttonReadByIdAndEmailAddress;
-    
-    @FXML
-    private TextField textboxSender;
-    
-    @FXML
     private TableView<Mailbox> emailTable;
-    
+
     @FXML
     private TableColumn<Mailbox, Integer> canvasaccountid;
-    
+
     @FXML
     private TableColumn<Mailbox, String> emailsender;
-    
+
     @FXML
     private TableColumn<Mailbox, String> emailtitle;
-    
+
     @FXML
     private TableColumn<Mailbox, String> emaildate;
     @FXML
     private TableColumn<Mailbox, String> emailtext;
-    
+
     @FXML
     private Button backButton;
 
     private ObservableList<Mailbox> emailData;
 
+    @FXML
+    private Button buttonReplyEmails;
+    @FXML
+    private Button searchEmailButton;
+    @FXML
+    private Button buttonAdvanceSearch;
+    @FXML
+    private Button buttonShowDetail;
+    @FXML
+    private Button viewSent;
+
+//Setting table data
     public void setTableData(List<Mailbox> emails) {
         emailData = FXCollections.observableArrayList();
         System.out.println("Hello");
@@ -98,210 +101,135 @@ public class MailboxMenuController implements Initializable {
         emailTable.refresh();
         System.out.println("Hello2");
     }
+    //code end
 
+// Search Email
     @FXML
     void searchByEmailAction(ActionEvent event) {
         System.out.println("Clicked");
         //Source: Demo Code     
         String emailsender = textboxSender.getText();
         System.out.println(emailsender);
-        
+
         List<Mailbox> email = readByEmailAddress(emailsender);
         if (email == null || email.isEmpty()) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Search Dialog Box");
             alert.setHeaderText("Search Results");
-            alert.setContentText("No Course Found");
-            alert.showAndWait(); 
-        } 
-        else {
+            alert.setContentText("No Email Found");
+            alert.showAndWait();
+        } else {
             setTableData(email);
         }
 
     }
+// Search Email End
 
+// Search Email Advance
     @FXML
     void searchByEmailAdvancedAction(ActionEvent event) {
-        System.out.println("clicked");     
-        String title = textboxSender.getText();
-        System.out.println(title);
+        //source: demo code
+        System.out.println("clicked");
 
-//        List<Mailbox> emails = readByEmailAddress(title);
-//
-//        if (emails == null || emails.isEmpty()) {
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Information Dialog Box");
-//            alert.setHeaderText("This is header section to write heading");
-//            alert.setContentText("No email");
-//            alert.showAndWait();
-//        } 
-//        else {
-//            setTableData(emails);
-//        }
+        String email = textboxSender.getText();
+
+        List<Mailbox> emails = readByEmailAddressAdvanced(email);
+
+        if (emails == null || emails.isEmpty()) {
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Search Dialog Box");
+            alert.setHeaderText("Search Results");
+            alert.setContentText("No Email Found");
+            alert.showAndWait();
+        } else {
+
+            setTableData(emails);
+        }
+// Seach Email Advance end
     }
 
+    // Search Email Advance Method
+    //source:demo code
+    public List<Mailbox> readByEmailAddressAdvanced(String email) {
+        Query query = manager.createNamedQuery("Mailbox.findBySenderAdvanced");
+
+        query.setParameter("emailsender", email);
+
+        List<Mailbox> emails = query.getResultList();
+
+        for (Mailbox e : emails) {
+            System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle() + " " + e.getEmailtext() + " " + e.getEmaildate());
+        }
+
+        return emails;
+    }
+
+    // Search Email Advance Method End
+    //Show email's detail
     @FXML
     void actionShowDetails(ActionEvent event) throws IOException {
         System.out.println("clicked");
 
-        Mailbox selectedEmail = emailTable.getSelectionModel().getSelectedItem();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DetailModelView.fxml"));
-        Parent detailedModelView = loader.load();
-        Scene tableViewScene = new Scene(detailedModelView);
+        //Source: Demo Code  
+        Mailbox selectedMail = emailTable.getSelectionModel().getSelectedItem();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MailboxDetailModelView.fxml"));
+
+        Parent MailboxDetailModelView = loader.load();
+
+        Scene tableViewScene = new Scene(MailboxDetailModelView);
+
         MailboxDetailModelController detailedControlled = loader.getController();
-        detailedControlled.initData(selectedEmail);
+
+        detailedControlled.initData(selectedMail);
+
         Stage stage = new Stage();
         stage.setScene(tableViewScene);
         stage.show();
     }
+    //Code End
 
+//create an email, it will pop up a sent email window
     @FXML
-    void actionShowDetailsInPlace(ActionEvent event) throws IOException {
-        System.out.println("clicked");
+    void createEmail(ActionEvent event) throws IOException {
+        //Source: Demo Code  
 
-        Mailbox selectedEmail = emailTable.getSelectionModel().getSelectedItem();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DetailModelView.fxml"));
-        Parent detailedModelView = loader.load();
-        Scene tableViewScene = new Scene(detailedModelView);
-        MailboxDetailModelController detailedControlled = loader.getController();
-        detailedControlled.initData(selectedEmail);
-        Scene currentScene = ((Node) event.getSource()).getScene();
-        detailedControlled.setPreviousScene(currentScene);
-        Stage stage = (Stage) currentScene.getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/createEmail.fxml"));
+
+        Parent createEmail = loader.load();
+
+        Scene tableViewScene = new Scene(createEmail);
+
+        CreateEmailController detailedControlled = loader.getController();
+
+        Stage stage = new Stage();
         stage.setScene(tableViewScene);
         stage.show();
-    }
-
-    @FXML
-    void createEmail(ActionEvent event) {
-        Scanner numinput = new Scanner(System.in);
-        
-        System.out.println("Enter ID:");
-        int id = numinput.nextInt();
-        
-        Scanner input = new Scanner (System.in);
-        
-        System.out.println("Enter Email Address:");       
-        String emailAddress = input.nextLine();
-        
-        System.out.println("Enter Email Title:");
-        String emailTitle = input.nextLine();
-        
-        System.out.println("Enter Email Text:");
-        String emailText = input.nextLine();
-        
-        //Got from https://mkyong.com/java/java-how-to-get-current-date-time-date-and-calender/
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDate localDate = LocalDate.now();
-        String emailDate = dtf.format(localDate);
-        
-        Mailbox email = new Mailbox();
-        
-        
-        email.setCanvasaccountid(id);
-        email.setEmailsender(emailAddress);
-        email.setEmailtitle(emailTitle);
-        email.setEmailtext(emailText);
-        email.setEmaildate(emailDate);
-            
-        create(email);
 
     }
+    //create email end
 
+// delete email
     @FXML
     void deleteEmail(ActionEvent event) {
-        Scanner input = new Scanner(System.in);
-        
-        System.out.println("Enter ID:");
-        int id = input.nextInt();
-        
+        Mailbox selectedMail = emailTable.getSelectionModel().getSelectedItem();
+
+        initData(selectedMail);
+
+    }
+    // delete end
+    Mailbox selectedModel;
+// get selected model's id
+
+    public void initData(Mailbox model) {
+        selectedModel = model;
+        int id = model.getCanvasaccountid();
         Mailbox e = readById(id);
-        System.out.println("Deleting email number: "+ e.toString());
         delete(e);
-        System.out.println("Email number: " + id + "is successfully deleted!");
 
     }
-    
-
-    @FXML
-    void readBySender(ActionEvent event) {
-        Scanner input = new Scanner(System.in);
-        
-        System.out.println("Enter Sender:");
-        int sender = input.nextInt();
-        
-        Mailbox e = readById(sender);
-        System.out.println(e.toString());
-
-    }
-
-    @FXML
-    void readByEmailAddress(ActionEvent event) {
-        Query query = manager.createNamedQuery("Mailbox.findAll");
-        List<Mailbox> courses = query.getResultList();
-
-        for (Mailbox e : courses) {
-            System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle() + " " + e.getEmailtext() + " " + e.getEmaildate());
-        }
-        setTableData(courses);
-
-    }
-
-    @FXML
-    void readByIdAndEmailAddress(ActionEvent event) {
-        Scanner input = new Scanner(System.in);
-        
-        System.out.println("Enter ID:");
-        int id = input.nextInt();
-        
-        System.out.println("Enter Email Address:");
-        String address = input.next();
-            
-//        List<Mailbox> emails =  readByIdAndEmailAddress(id, address);
-
-    }
-
-    @FXML
-    void readEmail(ActionEvent event) {
-
-    }
-
-    @FXML
-    void updateEmails(ActionEvent event) {
-        Scanner input = new Scanner(System.in);
-        
-        System.out.println("Enter An ID:");
-        int id = input.nextInt();
-        
-        System.out.println("Enter Email Address:");
-        String emailAddress = input.next();
-        
-        System.out.println("Enter Email Title:");
-        String emailTitle = input.next();
-        
-        Mailbox email = new Mailbox();
-        
-        email.setCanvasaccountid(id);
-        email.setEmailsender(emailAddress);
-        email.setEmailtitle(emailTitle);
-                
-//        update(email);
-
-    }
-    
-
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-
-        Query query = manager.createNamedQuery("Mailbox.findAll");
-        List<Mailbox> data = query.getResultList();
-
-        for (Mailbox e : data) {
-            //System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle());
-        }
-    }
+    //code end
 
     // Database manager Got from class code
     EntityManager manager;
@@ -310,7 +238,7 @@ public class MailboxMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //database reference: "IntroJavaFXPU"
         manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
-        
+
         // CODE FROM SAMPLE
         canvasaccountid.setCellValueFactory(new PropertyValueFactory<>("Canvasaccountid"));
         emailsender.setCellValueFactory(new PropertyValueFactory<>("Emailsender"));
@@ -325,138 +253,81 @@ public class MailboxMenuController implements Initializable {
 
     /*
     Implementing CRUD operations Got from class code
-    */
-    
-    // Create operation //from class code
-    public void create(Mailbox email) {
-        try {
-
-            manager.getTransaction().begin();
-
-            if (email.getCanvasaccountid() != null) {
-                
-                manager.persist(email);
-
-                manager.getTransaction().commit();
-                
-                System.out.println(email.toString() + " is created");
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-    
-    // Read Operations //from class code
-    public List<Mailbox> readAll(){
-        Query query = manager.createNamedQuery("Mailbox.findAll");
-        List<Mailbox> emails = query.getResultList();
-
-        for (Mailbox e : emails) {
-            System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle());
-        }
-        
-        return emails;
-    }
-    
+     */
     //from class code
-    public Mailbox readById(int id){
-        Query query = manager.createNamedQuery("Mailbox.findById");
-        
+    public Mailbox readById(int id) {
+        Query query = manager.createNamedQuery("Mailbox.findByCanvasaccountid");
 
-        query.setParameter("id", id);
-        
+        query.setParameter("canvasaccountid", id);
 
         Mailbox e = (Mailbox) query.getSingleResult();
         if (e != null) {
             System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle());
         }
-        
+
         return e;
-    }   
-    
+    }
+
     //from class code
-    public List<Mailbox> readByEmailAddress(String emailsender){
+    public List<Mailbox> readByEmailAddress(String emailsender) {
         Query query = manager.createNamedQuery("Mailbox.findByName");
-        
 
         query.setParameter("emailsender", emailsender);
-        
 
-        List<Mailbox> emails =  query.getResultList();
-        for (Mailbox e: emails) {
+        List<Mailbox> emails = query.getResultList();
+        for (Mailbox e : emails) {
             System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle() + " " + e.getEmailtext() + " " + e.getEmaildate());
         }
-        
+
         return emails;
-    }        
-    
-    //public List<Mailbox> readByIdAndEmailAddress(int id, String emailAddress){
-        //Query Mailbox = manager.createNamedQuery("Email.findByIdAndEmailAddress");
-        
-        //query.setParameter("id", id);
-        //query.setParameter("email address", emailAddress);
-        
-        //List<Mailbox> emails =  query.getResultList();
-        //for (Mailbox email: emails) {
-        //    System.out.println(email.getCanvasaccountid() + " " + email.getEmailsender() + " " + email.getEmailtitle());
-        //}
-        
-        //return emails;
-    //}        
-    
-    
-    // Update operation from class code
-//    public void update(Mailbox model) {
-//        try {
-//
-//            Mailbox existingEmail = manager.find(Mailbox.class, model.canvasAccountId());
-//
-//            if (existingEmail != null) {
-//                manager.getTransaction().begin();
-//                
-//                existingEmail.setEmailsender(model.getEmailsender());
-//                existingEmail.setEmailtitle(model.getEmailtitle());
-//                
-//                manager.getTransaction().commit();
-//            }
-//        } catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//    }
+    }
 
     // Delete operation from class code
     public void delete(Mailbox email) {
         try {
             Mailbox existingEmail = manager.find(Mailbox.class, email.getCanvasaccountid());
 
-
             if (existingEmail != null) {
-                
+
                 manager.getTransaction().begin();
 
                 manager.remove(existingEmail);
-                
+
                 manager.getTransaction().commit();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Delete Dialog Box");
+                alert.setHeaderText("Email Deleted");
+                alert.showAndWait();
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Delete Dialog Box");
+            alert.setHeaderText("Email Already Deleted");
+            alert.showAndWait();
+
         }
     }
-    
+
     Scene previousScene;
+
     public void setPreviousScene(Scene scene) {
         Scene previousScene = scene;
         //backButton.setDisable(false);
     }
-    
+// get back to home page
+
     @FXML
     void backButton1(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentMenuView.fxml"));
+        System.out.print("hi");
+        System.out.println("clicked");
 
-        Parent HomeLoader = loader.load();
-        Scene tableViewScene = new Scene(HomeLoader);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeScreen.fxml"));
 
-        StudentMenuController home = loader.getController();
+        Parent HomeScreen = loader.load();
+        Scene tableViewScene = new Scene(HomeScreen);
+
+        HomeScreenController home = loader.getController();
 
         Scene currentScene = ((Node) event.getSource()).getScene();
         home.setPreviousScene(currentScene);
@@ -465,4 +336,36 @@ public class MailboxMenuController implements Initializable {
         stage.setScene(tableViewScene);
         stage.show();
     }
-}
+
+//read all emails
+    @FXML
+    private void readAllEmails(ActionEvent event) {
+        Query query = manager.createNamedQuery("Mailbox.findAll");
+        List<Mailbox> courses = query.getResultList();
+
+        for (Mailbox e : courses) {
+            System.out.println(e.getCanvasaccountid() + " " + e.getEmailsender() + " " + e.getEmailtitle() + " " + e.getEmailtext() + " " + e.getEmaildate());
+        }
+        setTableData(courses);
+    }
+    //code end
+// view sented email, it will load email sent scene
+
+    @FXML
+    private void viewSentEmail(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SentMailbox.fxml"));
+
+        Parent SentMailLoader = loader.load();
+        Scene tableViewScene = new Scene(SentMailLoader);
+
+        SentMailController sentmail = loader.getController();
+
+        Scene currentScene = ((Node) event.getSource()).getScene();
+        sentmail.setPreviousScene(currentScene);
+
+        Stage stage = (Stage) currentScene.getWindow();
+        stage.setScene(tableViewScene);
+        stage.show();
+
+    } // code end
+} // end of mailboxMenu

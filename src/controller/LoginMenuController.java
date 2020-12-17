@@ -56,7 +56,7 @@ public class LoginMenuController implements Initializable {
     @FXML
     void createNew(ActionEvent event) throws IOException {
         System.out.println("clicked");
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/accountcreation.fxml"));
 
         Parent accountCreationLoader = loader.load();
@@ -78,8 +78,6 @@ public class LoginMenuController implements Initializable {
         //source: demo code
         String userID = IdBar.getText();
         String userPassword = password.getText();
-        
-        
 
         boolean loginStatus = false;
         if (userID.isEmpty() || userPassword.isEmpty()) {
@@ -89,60 +87,54 @@ public class LoginMenuController implements Initializable {
             alert.setHeaderText("Login Failed");
             alert.setContentText("No Password or ID Found");
             alert.showAndWait();
-        } 
-        else {
+        } else {
             // System.out.println("error");
 
-           loginStatus = LoginAccount(userID, userPassword);
-            
+            loginStatus = LoginAccount(userID, userPassword);
+
         }
-        if (loginStatus == true){
-            
+        if (loginStatus == true) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectionMenuView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectionMenuView.fxml"));
 
-        Parent HomeLoader = loader.load();
-        Scene tableViewScene = new Scene(HomeLoader);
+            Parent HomeLoader = loader.load();
+            Scene tableViewScene = new Scene(HomeLoader);
 
-        SelectionMenuController home = loader.getController();
+            SelectionMenuController home = loader.getController();
 
-        Scene currentScene = ((Node) event.getSource()).getScene();
-        home.setPreviousScene(currentScene);
+            Scene currentScene = ((Node) event.getSource()).getScene();
+            home.setPreviousScene(currentScene);
 
-        Stage stage = (Stage) currentScene.getWindow();
-        stage.setScene(tableViewScene);
-        stage.show(); 
-          
-            
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.setScene(tableViewScene);
+            stage.show();
+
         }
 
     }
 
     //source:demo code
     public boolean LoginAccount(String userID, String userPassword) {
-       try{
-        Query query = manager.createNamedQuery("Login.findByUseridAndPassword");
-        // setting query parameter
-        
-        query.setParameter("userid", Integer.parseInt(userID));
-        query.setParameter("password", userPassword);
+        try {
+            Query query = manager.createNamedQuery("Login.findByUseridAndPassword");
+            // setting query parameter
 
-       
-        Login logins = (Login) query.getSingleResult();
+            query.setParameter("userid", Integer.parseInt(userID));
+            query.setParameter("password", userPassword);
+
+            Login logins = (Login) query.getSingleResult();
             System.out.println("Login Success");
             return true;
-       
-       }
-       catch(Exception ex) {
+
+        } catch (Exception ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Login Dialog Box");
             alert.setHeaderText("Login Failed");
             alert.setContentText("No Password or ID Found");
             alert.showAndWait();
-           System.out.println("Login Failed");
-           return false;
-       }
-
+            System.out.println("Login Failed");
+            return false;
+        }
 
     }
 
@@ -158,7 +150,7 @@ public class LoginMenuController implements Initializable {
         manager = (EntityManager) Persistence.createEntityManagerFactory("YuanHaoHsuFXMLPU").createEntityManager();
         // TODO
     }
-    
+
     Scene previousScene;
 
     //Source: Demo Code

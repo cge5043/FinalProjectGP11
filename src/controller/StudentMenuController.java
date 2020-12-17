@@ -64,6 +64,9 @@ public class StudentMenuController implements Initializable {
     private Button searchButton;
 
     @FXML
+    private Button backbutton;
+
+    @FXML
     private TableView<Student> CourseTable;
 
     @FXML
@@ -119,21 +122,6 @@ public class StudentMenuController implements Initializable {
 
     @FXML
     private Button showDetail;
-    
-    @FXML
-    private Button courseButton1;
-    
-    @FXML
-    private Button logOutButton;
-    
-    @FXML
-    private Button mailboxButton;
-    
-    @FXML
-    private Button toDoListButton;
-    
-    @FXML
-    private Button groupMenuButton;
 
     @FXML
     void createStudent(ActionEvent event) throws IOException {
@@ -299,30 +287,29 @@ public class StudentMenuController implements Initializable {
 
     @FXML
     void showDetailButton(ActionEvent event) throws IOException {
-         //Source: Demo Code  
+        //Source: Demo Code  
         Student selectedAssignment = CourseTable.getSelectionModel().getSelectedItem();
-        if(selectedAssignment==null){
+        if (selectedAssignment == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error Information");
             alert.setHeaderText("Student Not Selected");
             alert.setContentText("Please Select a Student");
-            alert.showAndWait(); 
-        }
-        else{
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/studentDetail.fxml"));
+            alert.showAndWait();
+        } else {
 
-        Parent todolistdetails = loader.load();
-      
-        Scene textViewScene = new Scene(todolistdetails);
-      
-        StudentDetailController detailedControlled = loader.getController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/studentDetail.fxml"));
 
-        detailedControlled.initData(selectedAssignment);
-   
-        Stage stage = new Stage();
-        stage.setScene(textViewScene);
-        stage.show();
+            Parent todolistdetails = loader.load();
+
+            Scene textViewScene = new Scene(todolistdetails);
+
+            StudentDetailController detailedControlled = loader.getController();
+
+            detailedControlled.initData(selectedAssignment);
+
+            Stage stage = new Stage();
+            stage.setScene(textViewScene);
+            stage.show();
         }
 
     }
@@ -379,21 +366,24 @@ public class StudentMenuController implements Initializable {
 
         CourseTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
-    
+
     Scene previousScene;
+
     public void setPreviousScene(Scene scene) {
         previousScene = scene;
     }
-    
-        @FXML
-    void logOut(ActionEvent event) throws IOException {
-        System.out.println("Hello");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
 
-        Parent HomeLoader = loader.load();
-        Scene tableViewScene = new Scene(HomeLoader);
+    @FXML
+    void goback(ActionEvent event) throws IOException {
+        System.out.print("hi");
+        System.out.println("clicked");
 
-        LoginMenuController home = loader.getController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeScreen.fxml"));
+
+        Parent HomeScreen = loader.load();
+        Scene tableViewScene = new Scene(HomeScreen);
+
+        HomeScreenController home = loader.getController();
 
         Scene currentScene = ((Node) event.getSource()).getScene();
         home.setPreviousScene(currentScene);
@@ -401,86 +391,7 @@ public class StudentMenuController implements Initializable {
         Stage stage = (Stage) currentScene.getWindow();
         stage.setScene(tableViewScene);
         stage.show();
+
     }
-    
-    @FXML
-    void openMailbox(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MailboxMenuView.fxml"));
-
-        Parent HomeLoader = loader.load();
-        Scene tableViewScene = new Scene(HomeLoader);
-
-        MailboxMenuController home = loader.getController();
-
-        Scene currentScene = ((Node) event.getSource()).getScene();
-        home.setPreviousScene(currentScene);
-
-        Stage stage = (Stage) currentScene.getWindow();
-        stage.setScene(tableViewScene);
-        stage.show(); 
-    }
-    
-    @FXML
-    void showToDoList(ActionEvent event) throws IOException {
-        System.out.println("clicked");
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ToDoList.fxml"));
-
-        Parent toDoListModelView = loader.load();
-        Scene tableViewScene = new Scene(toDoListModelView);
-
-        ToDoListController toDolistControlled = loader.getController();
-
-        
-        Scene currentScene = ((Node) event.getSource()).getScene();
-        toDolistControlled.setPreviousScene(currentScene);
-
-        Stage stage = (Stage) currentScene.getWindow();
-        stage.setScene(tableViewScene);
-        stage.show();
-    }
-    
-    @FXML
-    void showCourses(ActionEvent event) throws IOException {
-        System.out.println("clicked");
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CourseMenuView.fxml"));
-
-        Parent CourseMenuView = loader.load();
-        Scene tableViewScene = new Scene(CourseMenuView);
-
-        CourseMenuController CourseMenuControlled = loader.getController();
-
-        
-        Scene currentScene = ((Node) event.getSource()).getScene();
-        CourseMenuControlled.setPreviousScene(currentScene);
-
-        Stage stage = (Stage) currentScene.getWindow();
-        stage.setScene(tableViewScene);
-        stage.show();
-    }
-    
-    
-    @FXML
-    void showGroupMenu(ActionEvent event) throws IOException {
-        System.out.println("clicked");
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GroupMenuView.fxml"));
-
-        Parent homeLoader = loader.load();
-        Scene tableViewScene = new Scene(homeLoader);
-
-        GroupMenuController home = loader.getController();
-
-        
-        Scene currentScene = ((Node) event.getSource()).getScene();
-        home.setPreviousScene(currentScene);
-
-        Stage stage = (Stage) currentScene.getWindow();
-        stage.setScene(tableViewScene);
-        stage.show();
-    }
-    
-    
 
 }

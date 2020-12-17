@@ -100,7 +100,7 @@ public class CreateGroupController implements Initializable {
         // TODO
     }    
 
-
+// Create button, take it from update view
     @FXML
     private void update(ActionEvent event) {
         String createGroupID = GroupidBar.getText();

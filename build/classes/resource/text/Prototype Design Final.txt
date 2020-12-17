@@ -1,0 +1,31 @@
+As practitioners in usability and human-centered design (HCD) we employ a wide range of methods for gathering information about users and their tasks, analyzing needs, creating design solutions, iterating designs through testing and evaluation, and measuring efficiency, effectiveness, and satisfaction.
+
+This deliverable demonstrates the consideration you have given to the problem, the user, and their experience. You will submit an iteration of your high fidelity prototype based on the results of your usability testing and a new heuristic evaluation.
+
+You are required to iterate your design, update your Spark and your XD, ensuring to present the results of the usability study in a mini report and apply heuristics that inform the modification of your high fidelity prototype. For details, please refer to the sample submission.
+
+The following are the steps recommended for this deliverable:
+1. Your group will first conduct a heuristic evaluation of your high-fidelity prototype to identify problems (5 problems at least).
+2. Summarize the problems you have found through the heuristic evaluation and the corresponding heuristics that each problem violates.
+3. Modify your high-fidelity prototype based on the heuristic evaluation results
+3. Next, your group will conduct qualitative usability tests (moderated, remote testing is recommended; each group member should conduct 1 testing session with 1 target user, thus the total number of participants should commensurate with your group size ).
+Note: be sure to plan the tests together beforehand, to ensure all the team members agree on the list of tasks you'd like to test.
+4. Create a report of the usability tests and upload it onto your Spark. The report should include the procedures (e.g., the tasks you tested in your usability testing) and the results of your usability testing. Please refer to the sample submission for details.
+5. Modify your high-fidelity prototype based on your usability testing results.
+6. Write a short paragraph, table, or bulleted list noting the changes you made and why
+7. Update your Spark page to reflect all the components.
+
+Useful Tools
+Adobe Creative Cloud Applications:
+Adobe XD
+Adobe Illustrator
+Zoom (for you to conduct and record the usability testing sessions)
+
+Sample Submission
+For a sample submission please visit: https://spark.adobe.com/page/hlFok7Q43KN9X/ (Links to an external site.)
+
+Files Created and Submitted
+Submitted Files:
+PDF file of the Spark page
+URL of the Spark page
+Adobe XD files or any design files created

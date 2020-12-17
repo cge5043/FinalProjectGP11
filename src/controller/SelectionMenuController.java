@@ -43,12 +43,12 @@ public class SelectionMenuController {
 
     @FXML
     void openStudentView(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeScreen.fxml"));
 
-        Parent HomeLoader = loader.load();
-        Scene tableViewScene = new Scene(HomeLoader);
+        Parent HomeScreenLoader = loader.load();
+        Scene tableViewScene = new Scene(HomeScreenLoader);
 
-        StudentMenuController home = loader.getController();
+        HomeScreenController home = loader.getController();
 
         Scene currentScene = ((Node) event.getSource()).getScene();
         home.setPreviousScene(currentScene);

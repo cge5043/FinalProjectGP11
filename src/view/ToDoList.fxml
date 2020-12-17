@@ -22,14 +22,15 @@
             <TableColumn fx:id="AssignmentColum" prefWidth="206.0" text="Assignment Name" />
          </columns>
       </TableView>
-      <Button fx:id="showAssign" layoutX="166.0" layoutY="138.0" mnemonicParsing="false" onAction="#toDoShowAll" prefHeight="34.0" prefWidth="171.0" text="Show All Assignements " />
+    <Button fx:id="showAssign" layoutX="82.0" layoutY="138.0" mnemonicParsing="false" onAction="#showAll" prefHeight="34.0" prefWidth="166.0" text="Show All Assignements " />
       <Text layoutX="78.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Course ID:" wrappingWidth="87.0">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
       <TextField fx:id="searchBar" layoutX="165.0" layoutY="75.0" prefHeight="23.0" prefWidth="175.0" />
-      <Button fx:id="searchButton" layoutX="348.0" layoutY="73.0" mnemonicParsing="false" onAction="#toDoSearchButton" prefHeight="28.0" prefWidth="68.0" text="Search" />
-      <Button fx:id="backButton" layoutX="23.0" layoutY="20.0" mnemonicParsing="false" onAction="#backButton1" prefHeight="36.0" prefWidth="63.0" text="Back" />
+      <Button fx:id="searchButton" layoutX="348.0" layoutY="73.0" mnemonicParsing="false" onAction="#searchButton1" prefHeight="28.0" prefWidth="68.0" text="Search" />
+       <Button fx:id="assigndetail" layoutX="265.0" layoutY="138.0" mnemonicParsing="false" onAction="#showdetails" prefHeight="34.0" prefWidth="166.0" text="Assignment Details" />
+      <Button fx:id="goback" layoutX="33.0" layoutY="20.0" mnemonicParsing="false" onAction="#backbutton" prefHeight="35.0" prefWidth="87.0" text="Back" />
    </children>
 </AnchorPane>
